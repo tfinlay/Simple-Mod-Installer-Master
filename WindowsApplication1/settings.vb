@@ -27,32 +27,45 @@ Public Class settings
 savebackuppath:
         Dim FILE_NAME As String = "C:\Tfff1\Simple_MC\Backup_path.txt"
 
-        If System.IO.File.Exists(FILE_NAME) = True Then
+        'If System.IO.File.Exists(FILE_NAME) = True Then
 
-            Dim objWriter As New System.IO.StreamWriter(FILE_NAME)
+        Dim objWriter As New System.IO.StreamWriter(FILE_NAME)
 
-            objWriter.Write(TextBox1.Text & "\Simple MC World Backups")
+            If Not TextBox1.Text.Contains("Simple MC World Backups") Then
+                objWriter.Write(TextBox1.Text & "\Simple MC World Backups")
+            Else
+                objWriter.Write(TextBox1.Text)
+            End If
             objWriter.Close()
-            'MessageBox.Show("Backup Directory saved!")
+        'MessageBox.Show("Backup Directory saved!")
 
-        Else
-            File.Create(FILE_NAME)
-            GoTo savebackuppath
-            'MessageBox.Show("!!!Failed to save to file at: C:\Tfff1\Simple_MC\Backup_path.txt - Maybe it doesn't exist?")
-        End If
+        'Else
+        'File.Create(FILE_NAME)
+        'GoTo savebackuppath
+        'MessageBox.Show("!!!Failed to save to file at: C:\Tfff1\Simple_MC\Backup_path.txt - Maybe it doesn't exist?")
+        ' End If
 
     End Sub
 
     Private Sub settings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim fileReader As System.IO.StreamReader
-        fileReader =
-        My.Computer.FileSystem.OpenTextFileReader("C:\Tfff1\Simple_MC\Backup_path.txt")
-        Dim stringReader As String
-        stringReader = fileReader.ReadLine()
-        TextBox1.Text = stringReader
-        fileReader.Close()
+Load:
+        If File.Exists("C:\Tfff1\Simple_MC\Backup_path.txt") Then
+            Dim fileReader As System.IO.StreamReader
+            fileReader = My.Computer.FileSystem.OpenTextFileReader("C:\Tfff1\Simple_MC\Backup_path.txt")
+            Dim stringReader As String
+            stringReader = fileReader.ReadLine()
+            TextBox1.Text = stringReader
+            fileReader.Close()
 
-        CheckBox1.Checked = My.Settings.checkForUpdates
+            CheckBox1.Checked = My.Settings.checkForUpdates
+        Else
+            File.Create("C:\Tfff1\Simple_MC\Backup_path.txt")
+            Me.Hide()
+            MsgBox("ERROR: Failed to find file at: C:\Tfff1\Simple_MC\Backup_path.txt. Please restart the program to fix this issue.")
+            Me.Close()
+            EntryMenu.Show()
+        End If
+
 
     End Sub
 End Class

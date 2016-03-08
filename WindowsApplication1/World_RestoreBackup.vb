@@ -5,11 +5,12 @@ Public Class World_RestoreBackup
         If My.Settings.Backup_path = "" Then
             MsgBox("You have not set a backups directory. Set one in settings.")
             Close()
+        Else
+                For Each Dir As String In Directory.GetDirectories(My.Settings.Backup_path)
+                CheckedListBox1.Items.Add(Dir.ToString)
+            Next
         End If
 
-        For Each Dir As String In Directory.GetDirectories(My.Settings.Backup_path)
-            CheckedListBox1.Items.Add(Dir.ToString)
-        Next
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -19,12 +20,26 @@ Public Class World_RestoreBackup
         ElseIf result = DialogResult.Yes Then
 
             Dim folderpath As String = CheckedListBox1.SelectedItem.ToString
-            MsgBox(folderpath)
+            MsgBox("You will be notified when Restoration is complete")
+            CheckedListBox1.Enabled = False
+            Button1.Text = "Restoration in progress - DO NOT CLOSE THIS PAGE"
+            Button1.Enabled = False
+            Button2.Enabled = False
+
             Dim savespath = My.Settings.appdata + "\.minecraft\saves"
-            Directory.Delete(savespath, True)
+            If My.Computer.FileSystem.DirectoryExists(savespath) Then
+                Directory.Delete(savespath, True)
+            End If
             My.Computer.FileSystem.CopyDirectory(folderpath + "\saves", savespath, True)
             MsgBox("Backup Restoration Successful!")
+
+            CheckedListBox1.Enabled = True
+            Button1.Text = "Restore Backup (Current worlds will be overwritten)"
+            Button1.Enabled = True
+            Button2.Enabled = True
+
         End If
+
 
     End Sub
 

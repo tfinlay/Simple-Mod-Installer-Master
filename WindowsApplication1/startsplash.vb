@@ -5,14 +5,24 @@ Public NotInheritable Class startsplash
         Bar1.Visible = False
         Label2.Visible = False
 
-        If (Not System.IO.Directory.Exists("c:\Tfff1")) Then
-            System.IO.Directory.CreateDirectory("c:\Tfff1")
+        If Not Directory.Exists("c:\Tfff1") Then
+            Directory.CreateDirectory("c:\Tfff1")
         End If
 
+        If Not Directory.Exists("c:\Tfff1\Simple_MC") Then
+            Directory.CreateDirectory("c:\Tfff1\Simple_MC")
+        End If
 
+        If Not File.Exists("C:\Tfff1\Simple_MC\Backup_path.txt") Then
+            File.Create("C:\Tfff1\Simple_MC\Backup_path.txt")
+        End If
 
-        If (Not System.IO.Directory.Exists("c:\Tfff1\Simple_MC")) Then
-            System.IO.Directory.CreateDirectory("c:\Tfff1\Simple_MC")
+        If Not Directory.Exists("C:\Tfff1\Simple_MC\Mod_Collections") Then
+            Directory.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections")
+        End If
+
+        If Not File.Exists("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt") Then
+            File.Create("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
         End If
 
         '    If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) Then
@@ -36,13 +46,12 @@ Public NotInheritable Class startsplash
         End If
     End Sub
 
-    'Private Sub client_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
-    'Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
-    '    Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
-    '    Dim percentage As Double = bytesIn / totalBytes * 100
-
-    '    Bar1.Value = Integer.Parse(Math.Truncate(percentage).ToString())
-    'End Sub
+    Private Sub client_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
+        Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
+        Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
+        Dim percentage As Double = bytesIn / totalBytes * 100
+        Bar1.Value = Integer.Parse(Math.Truncate(percentage).ToString())
+    End Sub
 
     Private Sub client_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         Bar1.Value = 100

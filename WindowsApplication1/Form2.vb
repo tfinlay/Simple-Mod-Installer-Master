@@ -1,9 +1,27 @@
-﻿Public Class Form2
+﻿Imports System.IO
+Public Class Form2
     Private Sub CollectionNameBox_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Enabled = False
+        Using sr As StreamReader = New StreamReader("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
+            Dim currentline As String
+            Dim totallength = File.ReadAllLines("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt").Length
+Scan:
+            If totallength > 0 Then
+                totallength = totallength - 1
+
+                currentline = sr.ReadLine
+                If currentline.Length > 0 Then
+                    CheckedListBox1.Items.Add(currentline)
+                    GoTo Scan
+                End If
+            ElseIf totallength <= 0 Then
+                Me.Enabled = True
+            End If
+        End Using
 
     End Sub
 

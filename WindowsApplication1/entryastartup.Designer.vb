@@ -156,7 +156,7 @@ Partial Class EntryMenu
         Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
         Me.PictureBox5.Location = New System.Drawing.Point(236, 127)
         Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(144, 50)
+        Me.PictureBox5.Size = New System.Drawing.Size(151, 50)
         Me.PictureBox5.TabIndex = 11
         Me.PictureBox5.TabStop = False
         '
