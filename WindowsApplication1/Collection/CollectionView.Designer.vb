@@ -37,6 +37,7 @@ Partial Class CollectionView
         Me.ActivateCollection = New System.Windows.Forms.Button()
         Me.CollectionView_RefreshButton = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -89,7 +90,7 @@ Partial Class CollectionView
         Me.Title.BackColor = System.Drawing.SystemColors.Control
         Me.Title.Font = New System.Drawing.Font("Microsoft Sans Serif", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Title.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Title.Location = New System.Drawing.Point(448, 9)
+        Me.Title.Location = New System.Drawing.Point(223, 9)
         Me.Title.Name = "Title"
         Me.Title.Size = New System.Drawing.Size(131, 42)
         Me.Title.TabIndex = 15
@@ -111,11 +112,12 @@ Partial Class CollectionView
         Me.AddMod.Name = "AddMod"
         Me.AddMod.Size = New System.Drawing.Size(75, 38)
         Me.AddMod.TabIndex = 17
-        Me.AddMod.Text = "Add a Mod"
+        Me.AddMod.Text = "Add Mods"
         Me.AddMod.UseVisualStyleBackColor = True
         '
         'ModList
         '
+        Me.ModList.CheckOnClick = True
         Me.ModList.FormattingEnabled = True
         Me.ModList.Location = New System.Drawing.Point(745, 97)
         Me.ModList.Name = "ModList"
@@ -174,6 +176,16 @@ Partial Class CollectionView
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(12, 154)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(255, 55)
+        Me.Button3.TabIndex = 24
+        Me.Button3.Text = "View Modded Folders" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " \flan etc."
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'CollectionView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -181,6 +193,7 @@ Partial Class CollectionView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1062, 596)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.CollectionView_RefreshButton)
         Me.Controls.Add(Me.ActivateCollection)
         Me.Controls.Add(Me.ModCount)
@@ -196,7 +209,9 @@ Partial Class CollectionView
         Me.Controls.Add(Me.Button1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "CollectionView"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CollectionView"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -217,4 +232,5 @@ Partial Class CollectionView
     Public WithEvents ActivateCollection As Button
     Public WithEvents CollectionView_RefreshButton As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Button3 As Button
 End Class

@@ -116,6 +116,18 @@
     <Compile Include="Collection\Collection_MissingInfo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Collection\FolderView.Designer.vb">
+      <DependentUpon>FolderView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\FolderView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Collection\NameFolder.Designer.vb">
+      <DependentUpon>NameFolder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\NameFolder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Collection\Collection_MissingInfo.resx">
       <DependentUpon>Collection_MissingInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\FolderView.resx">
+      <DependentUpon>FolderView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\NameFolder.resx">
+      <DependentUpon>NameFolder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>

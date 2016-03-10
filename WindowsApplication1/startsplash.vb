@@ -21,9 +21,13 @@ Public NotInheritable Class startsplash
             Directory.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections")
         End If
 
-        If Not File.Exists("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt") Then
-            File.Create("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
+        If File.Exists("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt") Then
+            File.Delete("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
         End If
+
+        'Scans Mod_Collections for folders - Overwrites collections.txt with the results.
+        Call Collection_FolderScan(Me, "C:\Tfff1\Simple_MC\Mod_Collections", False, "C:\Tfff1\Simple_MC\Mod_Collections\collections.txt", True)
+
 
         '    If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) Then
         '        My.Computer.Network.DownloadFile(

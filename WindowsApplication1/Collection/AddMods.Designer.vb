@@ -24,8 +24,8 @@ Partial Class AddMods
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddMods))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.AddFile_Title = New System.Windows.Forms.Label()
+        Me.AddButton = New System.Windows.Forms.Button()
         Me.SingleAdd = New System.Windows.Forms.RadioButton()
         Me.FolderAdd = New System.Windows.Forms.RadioButton()
         Me.SinglePath = New System.Windows.Forms.TextBox()
@@ -33,31 +33,32 @@ Partial Class AddMods
         Me.FolderBrowse = New System.Windows.Forms.Button()
         Me.FolderPath = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.CheckedListBox1 = New System.Windows.Forms.ListBox()
+        Me.ModList = New System.Windows.Forms.ListBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SuspendLayout()
         '
-        'Label1
+        'AddFile_Title
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(13, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(708, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Please either select a mod or a folder full of mods you wish to add to your colle" &
+        Me.AddFile_Title.AutoSize = True
+        Me.AddFile_Title.BackColor = System.Drawing.Color.Transparent
+        Me.AddFile_Title.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AddFile_Title.ForeColor = System.Drawing.Color.White
+        Me.AddFile_Title.Location = New System.Drawing.Point(13, 13)
+        Me.AddFile_Title.Name = "AddFile_Title"
+        Me.AddFile_Title.Size = New System.Drawing.Size(708, 24)
+        Me.AddFile_Title.TabIndex = 0
+        Me.AddFile_Title.Text = "Please either select a mod or a folder full of mods you wish to add to your colle" &
     "ction:"
         '
-        'Button1
+        'AddButton
         '
-        Me.Button1.Location = New System.Drawing.Point(13, 409)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(724, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Add Mod(s)"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.AddButton.Location = New System.Drawing.Point(13, 409)
+        Me.AddButton.Name = "AddButton"
+        Me.AddButton.Size = New System.Drawing.Size(724, 23)
+        Me.AddButton.TabIndex = 1
+        Me.AddButton.Text = "Add Mod(s)"
+        Me.AddButton.UseVisualStyleBackColor = True
         '
         'SingleAdd
         '
@@ -122,13 +123,13 @@ Partial Class AddMods
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Files that will be imported:"
         '
-        'CheckedListBox1
+        'ModList
         '
-        Me.CheckedListBox1.FormattingEnabled = True
-        Me.CheckedListBox1.Location = New System.Drawing.Point(13, 222)
-        Me.CheckedListBox1.Name = "CheckedListBox1"
-        Me.CheckedListBox1.Size = New System.Drawing.Size(724, 173)
-        Me.CheckedListBox1.TabIndex = 9
+        Me.ModList.FormattingEnabled = True
+        Me.ModList.Location = New System.Drawing.Point(13, 222)
+        Me.ModList.Name = "ModList"
+        Me.ModList.Size = New System.Drawing.Size(724, 173)
+        Me.ModList.TabIndex = 9
         '
         'Timer1
         '
@@ -141,7 +142,7 @@ Partial Class AddMods
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(749, 444)
-        Me.Controls.Add(Me.CheckedListBox1)
+        Me.Controls.Add(Me.ModList)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.FolderBrowse)
         Me.Controls.Add(Me.FolderPath)
@@ -149,10 +150,11 @@ Partial Class AddMods
         Me.Controls.Add(Me.SinglePath)
         Me.Controls.Add(Me.FolderAdd)
         Me.Controls.Add(Me.SingleAdd)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.AddButton)
+        Me.Controls.Add(Me.AddFile_Title)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "AddMods"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add a mod"
@@ -161,16 +163,16 @@ Partial Class AddMods
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents SingleAdd As RadioButton
-    Friend WithEvents FolderAdd As RadioButton
-    Friend WithEvents SinglePath As TextBox
-    Friend WithEvents SingleBrowse As Button
-    Friend WithEvents FolderBrowse As Button
-    Friend WithEvents FolderPath As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents CheckedListBox1 As ListBox
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+    Public WithEvents AddButton As Button
+    Public WithEvents SingleAdd As RadioButton
+    Public WithEvents FolderAdd As RadioButton
+    Public WithEvents SinglePath As TextBox
+    Public WithEvents SingleBrowse As Button
+    Public WithEvents FolderBrowse As Button
+    Public WithEvents FolderPath As TextBox
+    Public WithEvents ModList As ListBox
+    Public WithEvents AddFile_Title As Label
 End Class

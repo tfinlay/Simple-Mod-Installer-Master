@@ -185,6 +185,30 @@ Namespace My
                 Me("compareTitles") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SelectedCollection_MCversion() As String
+            Get
+                Return CType(Me("SelectedCollection_MCversion"),String)
+            End Get
+            Set
+                Me("SelectedCollection_MCversion") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property AddFiles_BasePath() As String
+            Get
+                Return CType(Me("AddFiles_BasePath"),String)
+            End Get
+            Set
+                Me("AddFiles_BasePath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

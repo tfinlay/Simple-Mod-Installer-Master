@@ -142,6 +142,7 @@ Partial Class Form3
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "Form3"
         Me.Text = "Mod Collection Creator"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

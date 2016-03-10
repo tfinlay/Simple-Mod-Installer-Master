@@ -8,28 +8,77 @@
 
             FolderBrowse.Enabled = False
             FolderPath.Enabled = False
-            CheckedListBox1.Enabled = False
+            ModList.Enabled = False
         ElseIf FolderAdd.Checked = True Then
             'Enable Folderadd
             FolderBrowse.Enabled = True
             FolderPath.Enabled = True
-            CheckedListBox1.Enabled = True
+            ModList.Enabled = True
 
             SingleBrowse.Enabled = False
             SinglePath.Enabled = False
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles AddButton.Click
+
+        Dim BasePath As String = My.Settings.AddFiles_BasePath
+
+        Enabled = False
+        Dim modcount = 0
         If SingleAdd.Checked = True Then
 
+            If Not SinglePath.Text = "" Then
+                If Not My.Computer.FileSystem.FileExists(BasePath + TrimmedFileName) Then
+                    My.Computer.FileSystem.CopyFile(SinglePath.Text, BasePath + TrimmedFileName)
+                    modcount = modcount + 1
+
+                    'Done
+                    MsgBox("Successfully added " + modcount.ToString + " file to your collection")
+                    Hide()
+                    CollectionView.Show()
+                    CollectionView.Enabled = True
+                    Close()
+                Else
+                    MsgBox("The selected file already exists in your collection.")
+                End If
+            Else
+                MsgBox("Please select a file to add before continuing.")
+            End If
 
         ElseIf FolderAdd.Checked = True Then
+            If Not FolderPath.Text = "" Then
 
+                For l_index As Integer = 0 To ModList.Items.Count - 1
+                    Dim l_text As String = CStr(ModList.Items(l_index))
+                    Dim FinishedPath
+                    Dim CurrentPath
 
+                    CurrentPath = FolderPath.Text + "\" + l_text
+                    FinishedPath = BasePath + l_text
+                    If Not My.Computer.FileSystem.FileExists(FinishedPath) Then
+                        My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
+                        modcount = modcount + 1
+                    Else
+                        MsgBox("File: " + l_text + " could not be added because it already exists in your collection.")
+                    End If
+                Next
+
+                MsgBox("Successfully added " + modcount.ToString + " file(s) to your collection")
+                Hide()
+                Call CollectionView.Load_Manager()
+                CollectionView.Show()
+                CollectionView.Enabled = True
+                Close()
+
+            Else
+                MsgBox("Please select a folder to get files from")
+            End If
         Else
-            MsgBox("Please select either a folder of mods or a mod to add to your collection before continuing.")
+            MsgBox("Please select either a folder of files or a file to add to your collection before continuing.")
         End If
+
+        Enabled = True
     End Sub
 
     Private Sub SingleBrowse_Click(sender As Object, e As EventArgs) Handles SingleBrowse.Click
@@ -38,8 +87,14 @@
 
         fd.Title = "Please Select a mod file to add to your collection"
         fd.InitialDirectory = "C:\"
-        fd.Filter = "Mod Files (*.jar,*.zip,*.litemod)|*.jar;*.zip;*.litemod"
-        fd.FilterIndex = 2
+        If My.Settings.AddFiles_BasePath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection + "\mods\" Then
+            fd.Filter = "Mod Files (*.jar,*.zip,*.litemod)|*.jar;*.zip;*.litemod"
+        Else
+            'fd.Filter = "All Files (*.*)|*.*"
+            fd.Filter = "All Files (*.*)|*.*|Mod Files (*.jar,*.zip,*.litemod)|*.jar;*.zip;*.litemod|Config Files (*.cfg)|*.cfg|Image Files (*.png,*.jpg,*.gif)|*.png;*.jpg;*.gif|Minecraft Sound Files (*.ogg)|*.ogg|Schematic Files (*.schematic)|*.schematic|iChun's Hats mod Files (*.tc2,*.md5)|*.tc2;*.md5"
+        End If
+
+        fd.FilterIndex = 1
         fd.RestoreDirectory = True
 
         If fd.ShowDialog() = DialogResult.OK Then
@@ -53,5 +108,21 @@
 
     Private Sub AddMods_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         CollectionView.Enabled = True
+        FolderView.Enabled = True
+    End Sub
+
+    Private Sub FolderBrowse_Click(sender As Object, e As EventArgs) Handles FolderBrowse.Click
+        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+            FolderPath.Text = FolderBrowserDialog1.SelectedPath
+
+            If System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length > 0 Then
+                MsgBox("It appears that the selected folder contains " + System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length.ToString + " other folders, please remove these folders from the directory, then select it again.")
+                FolderPath.Text = ""
+            Else
+                Call Collection_LoadMods(Me, FolderBrowserDialog1.SelectedPath, False)
+            End If
+
+
+        End If
     End Sub
 End Class

@@ -2,8 +2,8 @@
 Public Class Form3
     Public collectionstext As String
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles CollectionName.TextChanged
-        If CollectionName.Text.Contains("'") Or CollectionName.Text.Contains("&") Or CollectionName.Text.Contains("%") Or CollectionName.Text.Contains("$") Or CollectionName.Text.Contains("#") Or CollectionName.Text.Contains("@") Or CollectionName.Text.Contains("!") Or CollectionName.Text.Contains("*") Or CollectionName.Text.Contains("~") Or CollectionName.Text.Contains("`") Or CollectionName.Text.Contains(".") Or CollectionName.Text.Contains(",") Then
-            MsgBox("You can not enter the following characters into this box: ', &, %, $, #, @, !, *, ~, `, . or ,")
+        If CollectionName.Text.Contains("'") Or CollectionName.Text.Contains("&") Or CollectionName.Text.Contains("%") Or CollectionName.Text.Contains("$") Or CollectionName.Text.Contains("#") Or CollectionName.Text.Contains("@") Or CollectionName.Text.Contains("!") Or CollectionName.Text.Contains("*") Or CollectionName.Text.Contains("~") Or CollectionName.Text.Contains("`") Or CollectionName.Text.Contains(".") Or CollectionName.Text.Contains(",") Or CollectionName.Text.Contains("/") Or CollectionName.Text.Contains("\") Or CollectionName.Text.Contains("|") Then
+            MsgBox("You can not enter the following characters into this box: ', &, %, $, #, @, !, *, ~, `, . , \, /, | or ,")
             CollectionName.SelectAll()
         End If
     End Sub
@@ -20,8 +20,16 @@ Public Class Form3
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+
+
         If CollectionName.Text = "Please Enter a Name for your new collection" Then
             MsgBox("Please Set a unique name for your new Collection")
+        ElseIf MCversion.Text = "" Then
+            MsgBox("Please set a Minecraft Version for your Collection.")
+        ElseIf CollectionName.Text.Contains("'") Or CollectionName.Text.Contains("&") Or CollectionName.Text.Contains("%") Or CollectionName.Text.Contains("$") Or CollectionName.Text.Contains("#") Or CollectionName.Text.Contains("@") Or CollectionName.Text.Contains("!") Or CollectionName.Text.Contains("*") Or CollectionName.Text.Contains("~") Or CollectionName.Text.Contains("`") Or CollectionName.Text.Contains(".") Or CollectionName.Text.Contains(",") Or CollectionName.Text.Contains("/") Or CollectionName.Text.Contains("\") Or CollectionName.Text.Contains("|") Then
+            MsgBox("You can not enter the following characters into this box: ', &, %, $, #, @, !, *, ~, `, . , \, /, | or ,")
+            CollectionName.SelectAll()
         Else
             'Checking if collection already exists:
             Using sr As StreamReader = New StreamReader("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
@@ -29,6 +37,9 @@ Public Class Form3
             End Using
             If collectionstext.Contains(CollectionName.Text) Then
                 MsgBox("This collection already exists!")
+
+
+
             Else
                 'Add Collection
                 Enabled = False
@@ -58,8 +69,8 @@ Public Class Form3
                 My.Settings.SelectedCollection = CollectionName.Text
                 My.Settings.Save()
                 CollectionView.Show()
+                Close()
             End If
         End If
-        Close()
     End Sub
 End Class
