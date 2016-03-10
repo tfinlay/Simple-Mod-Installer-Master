@@ -15,7 +15,7 @@ Scan:
 
                 currentline = sr.ReadLine
                 If currentline.Length > 0 Then
-                    CheckedListBox1.Items.Add(currentline)
+                    ListBox1.Items.Add(currentline)
                     GoTo Scan
                 End If
             ElseIf totallength <= 0 Then
@@ -30,11 +30,19 @@ Scan:
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Form1.Show()
-        Close()
+        Try
+            My.Settings.SelectedCollection = ListBox1.SelectedItem.ToString
+            My.Settings.Save()
+            Hide()
+            CollectionView.Show()
+            Close()
+        Catch
+            MsgBox("Please select a Collection before continuing")
+        End Try
+
     End Sub
 
-    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBox1.SelectedIndexChanged
+    Private Sub CheckedListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -46,5 +54,9 @@ Scan:
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Form1.Show()
         Close()
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start(My.Settings.websiteurl)
     End Sub
 End Class

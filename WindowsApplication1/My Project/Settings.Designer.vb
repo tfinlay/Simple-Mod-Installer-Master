@@ -137,6 +137,54 @@ Namespace My
                 Me("updateurl") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SelectedCollection() As String
+            Get
+                Return CType(Me("SelectedCollection"),String)
+            End Get
+            Set
+                Me("SelectedCollection") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://minecraft-mod-installer.weebly.com")>  _
+        Public Property websiteurl() As String
+            Get
+                Return CType(Me("websiteurl"),String)
+            End Get
+            Set
+                Me("websiteurl") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property titleFromInfo() As String
+            Get
+                Return CType(Me("titleFromInfo"),String)
+            End Get
+            Set
+                Me("titleFromInfo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property compareTitles() As Boolean
+            Get
+                Return CType(Me("compareTitles"),Boolean)
+            End Get
+            Set
+                Me("compareTitles") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -22,6 +22,7 @@ Partial Class settings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(settings))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -34,6 +35,8 @@ Partial Class settings
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CompareCollectionTitles = New System.Windows.Forms.CheckBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'Label1
@@ -134,6 +137,19 @@ Partial Class settings
         Me.CheckBox1.Text = "Automatically Check for Updates"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
+        'CompareCollectionTitles
+        '
+        Me.CompareCollectionTitles.AutoSize = True
+        Me.CompareCollectionTitles.Checked = True
+        Me.CompareCollectionTitles.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CompareCollectionTitles.Location = New System.Drawing.Point(15, 90)
+        Me.CompareCollectionTitles.Name = "CompareCollectionTitles"
+        Me.CompareCollectionTitles.Size = New System.Drawing.Size(105, 17)
+        Me.CompareCollectionTitles.TabIndex = 17
+        Me.CompareCollectionTitles.Text = "Safer Collections"
+        Me.ToolTip1.SetToolTip(Me.CompareCollectionTitles, resources.GetString("CompareCollectionTitles.ToolTip"))
+        Me.CompareCollectionTitles.UseVisualStyleBackColor = True
+        '
         'settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -141,6 +157,7 @@ Partial Class settings
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(371, 313)
+        Me.Controls.Add(Me.CompareCollectionTitles)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
@@ -172,4 +189,6 @@ Partial Class settings
     Friend WithEvents Button3 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CompareCollectionTitles As CheckBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

@@ -12,6 +12,7 @@ Public Class settings
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        My.Settings.compareTitles = CompareCollectionTitles.Checked
         EntryMenu.Show()
         My.Settings.Backup_path = TextBox1.Text.ToString
         My.Settings.checkForUpdates = CheckBox1.Checked
@@ -66,6 +67,7 @@ Load:
             EntryMenu.Show()
         End If
 
+        CompareCollectionTitles.Checked = My.Settings.compareTitles
 
     End Sub
 End Class

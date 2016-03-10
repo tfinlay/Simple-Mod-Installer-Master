@@ -24,12 +24,14 @@ Partial Class Form3
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.CollectionName = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.MCversion = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,12 +47,12 @@ Partial Class Form3
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
-        'TextBox1
+        'CollectionName
         '
-        Me.TextBox1.Location = New System.Drawing.Point(59, 107)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(341, 20)
-        Me.TextBox1.TabIndex = 1
+        Me.CollectionName.Location = New System.Drawing.Point(59, 107)
+        Me.CollectionName.Name = "CollectionName"
+        Me.CollectionName.Size = New System.Drawing.Size(341, 20)
+        Me.CollectionName.TabIndex = 1
         '
         'Button1
         '
@@ -74,11 +76,11 @@ Partial Class Form3
         '
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.BackColor = System.Drawing.Color.White
+        Me.RadioButton1.Enabled = False
         Me.RadioButton1.Location = New System.Drawing.Point(153, 185)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(177, 17)
         Me.RadioButton1.TabIndex = 4
-        Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Texture Pack Collection (W.I.P.)"
         Me.RadioButton1.UseVisualStyleBackColor = False
         '
@@ -86,6 +88,7 @@ Partial Class Form3
         '
         Me.RadioButton2.AutoSize = True
         Me.RadioButton2.BackColor = System.Drawing.Color.White
+        Me.RadioButton2.Checked = True
         Me.RadioButton2.Location = New System.Drawing.Point(153, 208)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(95, 17)
@@ -104,20 +107,40 @@ Partial Class Form3
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Please Select what kind of collection you would like to create:"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(179, 241)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(92, 13)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Minecraft Version:"
+        '
+        'MCversion
+        '
+        Me.MCversion.Location = New System.Drawing.Point(59, 257)
+        Me.MCversion.Name = "MCversion"
+        Me.MCversion.Size = New System.Drawing.Size(341, 20)
+        Me.MCversion.TabIndex = 8
+        '
         'Form3
         '
+        Me.AcceptButton = Me.Button2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(456, 357)
+        Me.Controls.Add(Me.MCversion)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.RadioButton2)
         Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.CollectionName)
         Me.Controls.Add(Me.PictureBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
         Me.Text = "Mod Collection Creator"
@@ -128,10 +151,12 @@ Partial Class Form3
     End Sub
 
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents CollectionName As TextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents MCversion As TextBox
 End Class

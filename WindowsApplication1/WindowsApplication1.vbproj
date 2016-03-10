@@ -97,6 +97,25 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection\AddMods.Designer.vb">
+      <DependentUpon>AddMods.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\AddMods.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Collection\CollectionFunctions.vb" />
+    <Compile Include="Collection\CollectionView.Designer.vb">
+      <DependentUpon>CollectionView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\CollectionView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Collection\Collection_MissingInfo.Designer.vb">
+      <DependentUpon>Collection_MissingInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\Collection_MissingInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -116,10 +135,10 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.vb">
+    <Compile Include="Collection\Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form3.vb">
+    <Compile Include="Collection\Form3.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="helphome.Designer.vb">
@@ -162,26 +181,35 @@
     <Compile Include="Technicaddmodpage_selectmodpack.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="World_InstallerFormZip.Designer.vb">
+    <Compile Include="World\World_InstallerFormZip.Designer.vb">
       <DependentUpon>World_InstallerFormZip.vb</DependentUpon>
     </Compile>
-    <Compile Include="World_InstallerFormZip.vb">
+    <Compile Include="World\World_InstallerFormZip.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="world_installerOrBackup.Designer.vb">
+    <Compile Include="World\world_installerOrBackup.Designer.vb">
       <DependentUpon>world_installerOrBackup.vb</DependentUpon>
     </Compile>
-    <Compile Include="world_installerOrBackup.vb">
+    <Compile Include="World\world_installerOrBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="World_RestoreBackup.Designer.vb">
+    <Compile Include="World\World_RestoreBackup.Designer.vb">
       <DependentUpon>World_RestoreBackup.vb</DependentUpon>
     </Compile>
-    <Compile Include="World_RestoreBackup.vb">
+    <Compile Include="World\World_RestoreBackup.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Collection\AddMods.resx">
+      <DependentUpon>AddMods.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\CollectionView.resx">
+      <DependentUpon>CollectionView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\Collection_MissingInfo.resx">
+      <DependentUpon>Collection_MissingInfo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -191,7 +219,7 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
+    <EmbeddedResource Include="Collection\Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="helphome.resx">
@@ -212,16 +240,16 @@
     <EmbeddedResource Include="Technicaddmodpage_selectmodpack.resx">
       <DependentUpon>Technicaddmodpage_selectmodpack.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="World_InstallerFormZip.resx">
+    <EmbeddedResource Include="World\World_InstallerFormZip.resx">
       <DependentUpon>World_InstallerFormZip.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="world_installerOrBackup.nqo.resx">
+    <EmbeddedResource Include="World\world_installerOrBackup.nqo.resx">
       <DependentUpon>world_installerOrBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="world_installerOrBackup.resx">
+    <EmbeddedResource Include="World\world_installerOrBackup.resx">
       <DependentUpon>world_installerOrBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="World_RestoreBackup.resx">
+    <EmbeddedResource Include="World\World_RestoreBackup.resx">
       <DependentUpon>World_RestoreBackup.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

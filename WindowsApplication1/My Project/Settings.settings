@@ -23,5 +23,17 @@
     <Setting Name="updateurl" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SelectedCollection" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="websiteurl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://minecraft-mod-installer.weebly.com</Value>
+    </Setting>
+    <Setting Name="titleFromInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="compareTitles" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
