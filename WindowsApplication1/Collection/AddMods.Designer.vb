@@ -158,7 +158,6 @@ Partial Class AddMods
         Me.Name = "AddMods"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add a mod"
-        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

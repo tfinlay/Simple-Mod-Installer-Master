@@ -34,8 +34,11 @@
     End Sub
 
     Public Sub SubDirectoriesList_SelectedIndexChanged() Handles SubDirectoriesList.SelectedIndexChanged
-
-        Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
+        If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
+            Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
+        Else
+            Call Collection_FolderView_LoadManager()
+        End If
     End Sub
 
     Private Sub AddFile_Click(sender As Object, e As EventArgs) Handles AddFile.Click
@@ -82,5 +85,49 @@
         Enabled = False
         Visible = False
         NameFolder.Show()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles delfolder.Click
+        If Not SubDirectoriesList.SelectedItem.ToString = "mods" Or Not SubDirectoriesList.SelectedItem.ToString = "config" Or Not SubDirectoriesList.SelectedItem.ToString = My.Settings.SelectedCollection_MCversion Then
+            If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
+                Try
+                    My.Computer.FileSystem.DeleteDirectory(Path + "\" + SubDirectoriesList.SelectedItem.ToString, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                Catch ex As Exception
+                    MsgBox("Failed to delete folder: " + SubDirectoriesList.SelectedItem.ToString + "Maybe it's already been deleted? Try Clicking the refresh button.")
+                End Try
+            Else
+                MsgBox("It appears that the directory has already been deleted")
+            End If
+        End If
+        Call Collection_FolderView_LoadManager()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If SubDirectoriesList.SelectedItems.Count < 1 Then
+            AddFile.Enabled = False
+            EditFile.Enabled = False
+            DelFile.Enabled = False
+            delfolder.Enabled = False
+            openFolder.Enabled = False
+        Else
+            AddFile.Enabled = True
+            EditFile.Enabled = True
+            DelFile.Enabled = True
+            delfolder.Enabled = True
+            openFolder.Enabled = True
+        End If
+        If Not CollectionView.Enabled = False Then
+            CollectionView.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles openFolder.Click
+        If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
+            Process.Start(Path + "\" + SubDirectoriesList.SelectedItem.ToString)
+        Else
+            MsgBox("Couldn't find folder")
+            Call Collection_FolderView_LoadManager()
+        End If
     End Sub
 End Class

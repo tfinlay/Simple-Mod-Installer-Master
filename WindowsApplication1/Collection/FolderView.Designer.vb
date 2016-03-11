@@ -22,6 +22,7 @@ Partial Class FolderView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FolderView))
         Me.SubDirectoriesList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -33,6 +34,9 @@ Partial Class FolderView
         Me.AddFolder = New System.Windows.Forms.Button()
         Me.Back_Button = New System.Windows.Forms.Button()
         Me.Refresh_Button = New System.Windows.Forms.Button()
+        Me.delfolder = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.openFolder = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'SubDirectoriesList
@@ -106,7 +110,7 @@ Partial Class FolderView
         '
         Me.AddFolder.Location = New System.Drawing.Point(12, 63)
         Me.AddFolder.Name = "AddFolder"
-        Me.AddFolder.Size = New System.Drawing.Size(107, 23)
+        Me.AddFolder.Size = New System.Drawing.Size(95, 23)
         Me.AddFolder.TabIndex = 9
         Me.AddFolder.Text = "Add New Folder"
         Me.AddFolder.UseVisualStyleBackColor = True
@@ -129,6 +133,28 @@ Partial Class FolderView
         Me.Refresh_Button.Text = "Refresh"
         Me.Refresh_Button.UseVisualStyleBackColor = True
         '
+        'delfolder
+        '
+        Me.delfolder.Location = New System.Drawing.Point(113, 62)
+        Me.delfolder.Name = "delfolder"
+        Me.delfolder.Size = New System.Drawing.Size(78, 23)
+        Me.delfolder.TabIndex = 12
+        Me.delfolder.Text = "Delete Folder"
+        Me.delfolder.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        '
+        'openFolder
+        '
+        Me.openFolder.Location = New System.Drawing.Point(198, 61)
+        Me.openFolder.Name = "openFolder"
+        Me.openFolder.Size = New System.Drawing.Size(75, 23)
+        Me.openFolder.TabIndex = 13
+        Me.openFolder.Text = "Open Folder"
+        Me.openFolder.UseVisualStyleBackColor = True
+        '
         'FolderView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -136,6 +162,8 @@ Partial Class FolderView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.ClientSize = New System.Drawing.Size(730, 434)
+        Me.Controls.Add(Me.openFolder)
+        Me.Controls.Add(Me.delfolder)
         Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Back_Button)
         Me.Controls.Add(Me.AddFolder)
@@ -153,7 +181,6 @@ Partial Class FolderView
         Me.Name = "FolderView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "View Modded Folders"
-        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -168,4 +195,7 @@ Partial Class FolderView
     Public WithEvents AddFolder As Button
     Public WithEvents Back_Button As Button
     Public WithEvents Refresh_Button As Button
+    Friend WithEvents delfolder As Button
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents openFolder As Button
 End Class

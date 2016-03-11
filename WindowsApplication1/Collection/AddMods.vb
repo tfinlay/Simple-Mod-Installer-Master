@@ -55,13 +55,29 @@
                     Dim CurrentPath
 
                     CurrentPath = FolderPath.Text + "\" + l_text
-                    FinishedPath = BasePath + l_text
-                    If Not My.Computer.FileSystem.FileExists(FinishedPath) Then
-                        My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
-                        modcount = modcount + 1
+
+                    If My.Computer.FileSystem.FileExists(CurrentPath) Then
+                        FinishedPath = BasePath + l_text
+
+                        If Not My.Computer.FileSystem.FileExists(FinishedPath) Then
+                            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
+                            modcount = modcount + 1
+                        Else
+                            MsgBox("File: " + l_text + " could not be added because it already exists in your collection.")
+                        End If
+
                     Else
-                        MsgBox("File: " + l_text + " could not be added because it already exists in your collection.")
+                        CurrentPath = FolderPath.Text + "\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                        FinishedPath = BasePath + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                        Try
+                            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
+                            modcount = modcount + 1
+                        Catch
+                            MsgBox("Failed to copy file:" + CurrentPath + "to new location as: " + FinishedPath)
+                        End Try
                     End If
+
+
                 Next
 
                 MsgBox("Successfully added " + modcount.ToString + " file(s) to your collection")
@@ -115,14 +131,14 @@
         If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
             FolderPath.Text = FolderBrowserDialog1.SelectedPath
 
-            If System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length > 0 Then
-                MsgBox("It appears that the selected folder contains " + System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length.ToString + " other folders, please remove these folders from the directory, then select it again.")
-                FolderPath.Text = ""
-            Else
-                Call Collection_LoadMods(Me, FolderBrowserDialog1.SelectedPath, False)
+            'If System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length > 0 Then
+            '    MsgBox("It appears that the selected folder contains " + System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length.ToString + " other folders, please remove these folders from the directory, then select it again.")
+            '    FolderPath.Text = ""
+            'Else
+            Call Collection_LoadMods(Me, FolderBrowserDialog1.SelectedPath, False)
+                'End If
+
+
             End If
-
-
-        End If
     End Sub
 End Class

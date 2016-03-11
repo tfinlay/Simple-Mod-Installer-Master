@@ -22,6 +22,7 @@ Partial Class CollectionView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CollectionView))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
@@ -38,6 +39,11 @@ Partial Class CollectionView
         Me.CollectionView_RefreshButton = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeselectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -118,6 +124,7 @@ Partial Class CollectionView
         'ModList
         '
         Me.ModList.CheckOnClick = True
+        Me.ModList.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ModList.FormattingEnabled = True
         Me.ModList.Location = New System.Drawing.Point(745, 97)
         Me.ModList.Name = "ModList"
@@ -186,6 +193,30 @@ Partial Class CollectionView
         Me.Button3.Text = "View Modded Folders" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " \flan etc."
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectAllToolStripMenuItem, Me.DeselectAllToolStripMenuItem, Me.RemoveAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 92)
+        '
+        'SelectAllToolStripMenuItem
+        '
+        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SelectAllToolStripMenuItem.Text = "Select All"
+        '
+        'DeselectAllToolStripMenuItem
+        '
+        Me.DeselectAllToolStripMenuItem.Name = "DeselectAllToolStripMenuItem"
+        Me.DeselectAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeselectAllToolStripMenuItem.Text = "Deselect All"
+        '
+        'RemoveAllToolStripMenuItem
+        '
+        Me.RemoveAllToolStripMenuItem.Name = "RemoveAllToolStripMenuItem"
+        Me.RemoveAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RemoveAllToolStripMenuItem.Text = "Remove all"
+        '
         'CollectionView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -213,6 +244,7 @@ Partial Class CollectionView
         Me.Name = "CollectionView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CollectionView"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -233,4 +265,8 @@ Partial Class CollectionView
     Public WithEvents CollectionView_RefreshButton As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Button3 As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeselectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RemoveAllToolStripMenuItem As ToolStripMenuItem
 End Class

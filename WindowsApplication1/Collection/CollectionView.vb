@@ -25,6 +25,7 @@ Public Class CollectionView
     Sub Load_Manager()
         'Disable Changes While Loading:
         Enabled = False
+        EntryMenu.Enabled = False
         ModInt = 0
         'Start Calling:
         Call Collection_LoadMods(Me, Path, True)
@@ -85,5 +86,31 @@ Public Class CollectionView
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Enabled = False
         FolderView.Show()
+    End Sub
+
+    Private Sub CollectionView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        EntryMenu.Enabled = True
+    End Sub
+
+    Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
+        Dim checked As Boolean = True   ' Set to True or False, as required.
+        For i As Integer = 0 To ModList.Items.Count - 1
+            ModList.SetItemChecked(i, checked)
+        Next
+    End Sub
+
+    Private Sub RemoveAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveAllToolStripMenuItem.Click
+        Dim checked As Boolean = True   ' Set to True or False, as required.
+        For i As Integer = 0 To ModList.Items.Count - 1
+            ModList.SetItemChecked(i, checked)
+        Next
+        DelMod.PerformClick()
+    End Sub
+
+    Private Sub DeselectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeselectAllToolStripMenuItem.Click
+        Dim checked As Boolean = False   ' Set to True or False, as required.
+        For i As Integer = 0 To ModList.Items.Count - 1
+            ModList.SetItemChecked(i, checked)
+        Next
     End Sub
 End Class
