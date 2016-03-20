@@ -97,6 +97,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection\Activation.Designer.vb">
+      <DependentUpon>Activation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\Activation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Collection\AddMods.Designer.vb">
       <DependentUpon>AddMods.vb</DependentUpon>
     </Compile>
@@ -213,6 +219,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Collection\Activation.resx">
+      <DependentUpon>Activation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Collection\AddMods.resx">
       <DependentUpon>AddMods.vb</DependentUpon>
     </EmbeddedResource>

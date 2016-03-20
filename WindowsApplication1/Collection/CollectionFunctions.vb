@@ -196,7 +196,7 @@ Scan:
             My.Computer.FileSystem.DeleteFile(CollectionPath + "\mods\folders.txt")
         End If
         'Write to Folder List
-        Using sw As StreamWriter = New StreamWriter(CollectionPath + "\mods\folders.txt")
+        Using sw As StreamWriter = New StreamWriter(CollectionPath + "\mods\folders.txt", True)
 
             For Each Dir As String In System.IO.Directory.GetDirectories(CollectionPath)
                 Dim dirInfo As New System.IO.DirectoryInfo(Dir)
@@ -214,12 +214,13 @@ Scan:
                 If File.Name.ToString.Contains(".CollectionInfo") Then
                     MsgBox(File.Name.ToString)
                     CurrentlyEnabledFile = File.Name.ToString
-                    GoTo CheckDone
                     Application.DoEvents()
+                    GoTo CheckDone
                 End If
             Next
 CheckDone:
             MsgBox("Skipped to CheckDone")
+            'Now get the Collection's Name out of the CollectionInfo File
             Try
                 Dim currentLine As String
                 Dim Readlines As Integer = 0
@@ -230,6 +231,7 @@ Scan:
                         currentLine = sr.ReadLine.ToString
                         If Readlines = 0 Then
                             CurrentlyEnabledCollectionName = currentLine
+                            sender.CurrentlyActivated.text = CurrentlyEnabledCollectionName
                             Readlines = Readlines + 1
                             GoTo Scan
                         End If
@@ -237,12 +239,77 @@ Scan:
                 End Using
             Catch ex As Exception
                 MsgBox("An Error ocurred when reading information from currently enabled Collection's .CollectionInfo File")
-                Return
+            Return
             End Try
 
+            'Now Deactivate The Collection
+            If CurrentlyEnabledCollectionName = My.Settings.SelectedCollection Then
+                MsgBox("All folders will be synced")
+                Call SyncCollections()
+            Else
+                MsgBox("The Collection: " + CurrentlyEnabledCollectionName + " will be deactivated")
+                'Deactivate Collection - saving changes to 'saves' and 'config' folders
+                Dim linecount As Integer
+                linecount = File.ReadAllLines(appdata + "\.minecraft\mods\folder.txt").Length
+                Using sr As StreamReader = New StreamReader(appdata + "\.minecraft\mods\folder.txt")
+readfolders:
+                    If linecount > 0 Then
+                        sender.FolderList.Items.Add(sr.ReadLine().ToString)
+                        linecount = linecount - 1
+                        GoTo readfolders
+                    End If
+                End Using
+
+                'Sync Each folder
+
+            End If
+        Else
+            Call FirstCollectionPush
         End If
         '
 
         Return
+    End Sub
+
+    Public Sub SyncCollections()
+        'Called if a collection is activated and changes have been made to the non .minecraft version. Will Overwrite everything in .minecraft except saves and config, saves and config will be synced properly.
+
+    End Sub
+
+    Public Sub FirstCollectionPush()
+        Dim appdata = My.Settings.appdata
+        Dim CollectionPath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection
+
+        'Creates Filesystem if necessary and overwrites everything in it's path
+        Dim linecount As Integer
+        linecount = File.ReadAllLines(CollectionPath + "\mods\folders.txt").Length
+        Using sr As StreamReader = New StreamReader(CollectionPath + "\mods\folders.txt")
+readfolders:
+            If linecount > 0 Then
+                Activation.FolderList.Items.Add(sr.ReadLine().ToString)
+                linecount = linecount - 1
+                GoTo readfolders
+            End If
+        End Using
+        'Copy Folders:
+        For l_index As Integer = 0 To Activation.FolderList.Items.Count - 1
+            Dim l_text As String = CStr(Activation.FolderList.Items(l_index))
+            Try
+                My.Computer.FileSystem.CopyDirectory(CollectionPath + "\" + l_text, appdata + "\.minecraft\" + l_text, True)
+            Catch ex As Exception
+                MsgBox("Failed to Copy Folder: " + l_text)
+            End Try
+        Next
+
+        If My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Mod_Collections\ActiveCollection.txt") Then
+            My.Computer.FileSystem.DeleteFile("C:\Tfff1\Simple_MC\Mod_Collections\ActiveCollection.txt")
+        End If
+        Using sw As StreamWriter = New StreamWriter("C:\Tfff1\Simple_MC\Mod_Collections\ActiveCollection.txt", True)
+            sw.WriteLine(My.Settings.SelectedCollection)
+        End Using
+
+        MsgBox("Collection Active! Remember to Launch Minecraft with your modloader for Minecraft: " + My.Settings.SelectedCollection_MCversion)
+        Activation.PermittedClose = True
+        Activation.Close()
     End Sub
 End Module

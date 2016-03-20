@@ -44,6 +44,7 @@ Partial Class CollectionView
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -227,6 +228,15 @@ Partial Class CollectionView
         Me.Button2.Text = "Disable Selected"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(745, 16)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(156, 34)
+        Me.Button5.TabIndex = 27
+        Me.Button5.Text = "Details"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'CollectionView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -234,6 +244,7 @@ Partial Class CollectionView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1062, 596)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -281,4 +292,5 @@ Partial Class CollectionView
     Friend WithEvents RemoveAllToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button4 As Button
     Public WithEvents Button2 As Button
+    Friend WithEvents Button5 As Button
 End Class

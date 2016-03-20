@@ -190,8 +190,9 @@ Public Class CollectionView
         '!!!!!!!!!!!!!!!!!!!!!!!!!!
         '!ACTIVATES THE COLLECTION!
         '!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Enabled = False
+        Activation.Show()
 
-        Call ActivateCollection(Me)
-
+        Call ActivateCollection(Activation)
     End Sub
 End Class
