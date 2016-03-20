@@ -23,13 +23,23 @@ Module CollectionFunctions
         End If
 
         Dim Folder As New IO.DirectoryInfo(path + modsq)
-
-        For Each File As IO.FileInfo In Folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
-            If Not File.Name.ToString.Contains(".CollectionInfo") Then
-                sender.ModList.Items.Add(File.Name)
-                Application.DoEvents()
-            End If
-        Next
+        Try
+            For Each File As IO.FileInfo In Folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+                If Not File.Name.ToString.Contains(".CollectionInfo") Then
+                    sender.ModList.Items.Add(File.Name)
+                    Application.DoEvents()
+                End If
+            Next
+        Catch
+            MsgBox("An error occured when looking for mods. Maybe the mods folder has been deleted? We're going to try and create a new one now...")
+            Try
+                My.Computer.FileSystem.CreateDirectory(path + modsq)
+            Catch
+                MsgBox("The attempt to create the folder has failed too. try creating a new collection.")
+                CollectionView.Close()
+                Form3.Show()
+            End Try
+        End Try
         Return
     End Sub
 
@@ -158,4 +168,25 @@ Scan:
 
     End Sub
 
+    Public Sub FolderCheck(path As String)
+        If Not My.Computer.FileSystem.DirectoryExists(path + "\config") Then
+            My.Computer.FileSystem.CreateDirectory(path + "\config")
+        End If
+
+        If Not My.Computer.FileSystem.DirectoryExists(path + "\mods") Then
+            My.Computer.FileSystem.CreateDirectory(path + "\mods")
+        End If
+
+        If Not My.Computer.FileSystem.DirectoryExists(path + "\DisabledMods") Then
+            My.Computer.FileSystem.CreateDirectory(path + "\DisabledMods")
+        End If
+
+        If Not My.Computer.FileSystem.DirectoryExists(path + "\mods\" + My.Settings.SelectedCollection_MCversion) Then
+            My.Computer.FileSystem.CreateDirectory(path + "\mods\" + My.Settings.SelectedCollection_MCversion)
+        End If
+    End Sub
+
+    Public Sub ActivateCollection()
+
+    End Sub
 End Module

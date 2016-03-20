@@ -35,9 +35,6 @@
 
                     'Done
                     MsgBox("Successfully added " + modcount.ToString + " file to your collection")
-                    Hide()
-                    CollectionView.Show()
-                    CollectionView.Enabled = True
                     Close()
                 Else
                     MsgBox("The selected file already exists in your collection.")
@@ -81,11 +78,8 @@
                 Next
 
                 MsgBox("Successfully added " + modcount.ToString + " file(s) to your collection")
-                Hide()
-                Call CollectionView.Load_Manager()
-                CollectionView.Show()
-                CollectionView.Enabled = True
                 Close()
+
 
             Else
                 MsgBox("Please select a folder to get files from")
@@ -123,8 +117,27 @@
     End Sub
 
     Private Sub AddMods_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        CollectionView.Enabled = True
-        FolderView.Enabled = True
+
+        If Not My.Settings.AddFiles_BasePath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection + "\mods\" Then
+            'FolderView is sender:
+            FolderView.Enabled = True
+            Hide()
+            My.Settings.AddFiles_BasePath = ""
+            My.Settings.Save()
+            Call FolderView.Collection_FolderView_LoadManager()
+            FolderView.Show()
+            FolderView.Enabled = True
+        Else
+            'Collection View is sender:
+            CollectionView.Enabled = True
+            Hide()
+            My.Settings.AddFiles_BasePath = ""
+            My.Settings.Save()
+            Call CollectionView.Load_Manager()
+            CollectionView.Show()
+            CollectionView.Enabled = True
+        End If
+
     End Sub
 
     Private Sub FolderBrowse_Click(sender As Object, e As EventArgs) Handles FolderBrowse.Click
@@ -136,9 +149,9 @@
             '    FolderPath.Text = ""
             'Else
             Call Collection_LoadMods(Me, FolderBrowserDialog1.SelectedPath, False)
-                'End If
+            'End If
 
 
-            End If
+        End If
     End Sub
 End Class

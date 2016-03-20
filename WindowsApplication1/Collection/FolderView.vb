@@ -4,7 +4,7 @@
 
     Private Sub FolderView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         CollectionView.Enabled = True
-
+        CollectionView.CollectionView_RefreshButton.PerformClick()
         'If closeform = False Then
         '    e.Cancel = True
         '    MsgBox("Please use the Back button to close this window safely")
@@ -34,11 +34,14 @@
     End Sub
 
     Public Sub SubDirectoriesList_SelectedIndexChanged() Handles SubDirectoriesList.SelectedIndexChanged
-        If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
-            Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
-        Else
-            Call Collection_FolderView_LoadManager()
-        End If
+        Try
+            If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
+                Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
+            Else
+                Call Collection_FolderView_LoadManager()
+            End If
+        Catch
+        End Try
     End Sub
 
     Private Sub AddFile_Click(sender As Object, e As EventArgs) Handles AddFile.Click
@@ -98,6 +101,9 @@
             Else
                 MsgBox("It appears that the directory has already been deleted")
             End If
+
+        Else
+            MsgBox("You cannot delete this directory!")
         End If
         Call Collection_FolderView_LoadManager()
     End Sub
@@ -123,11 +129,15 @@
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles openFolder.Click
-        If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
-            Process.Start(Path + "\" + SubDirectoriesList.SelectedItem.ToString)
-        Else
-            MsgBox("Couldn't find folder")
-            Call Collection_FolderView_LoadManager()
-        End If
+        Try
+            If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
+                Process.Start(Path + "\" + SubDirectoriesList.SelectedItem.ToString)
+            Else
+                MsgBox("Couldn't find folder")
+                Call Collection_FolderView_LoadManager()
+            End If
+        Catch
+            MsgBox("An error ocurred")
+        End Try
     End Sub
 End Class
