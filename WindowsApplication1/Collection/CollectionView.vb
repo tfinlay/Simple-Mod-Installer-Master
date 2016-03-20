@@ -186,12 +186,12 @@ Public Class CollectionView
         Call Load_Manager()
     End Sub
 
-    Private Sub ActivateCollection_Click(sender As Object, e As EventArgs) Handles ActivateCollection.Click
+    Private Sub ActivateCollection_Click(sender As Object, e As EventArgs) Handles Activate.Click
         '!!!!!!!!!!!!!!!!!!!!!!!!!!
         '!ACTIVATES THE COLLECTION!
         '!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        Call ActivateCollection()
+        Call ActivateCollection(Me)
 
     End Sub
 End Class

@@ -186,7 +186,63 @@ Scan:
         End If
     End Sub
 
-    Public Sub ActivateCollection()
+    Public Sub ActivateCollection(sender As Object)
+        Dim appdata = My.Settings.appdata
+        Dim CollectionPath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection
 
+
+        'Reset Folder List
+        If My.Computer.FileSystem.FileExists(CollectionPath + "\mods\folders.txt") Then
+            My.Computer.FileSystem.DeleteFile(CollectionPath + "\mods\folders.txt")
+        End If
+        'Write to Folder List
+        Using sw As StreamWriter = New StreamWriter(CollectionPath + "\mods\folders.txt")
+
+            For Each Dir As String In System.IO.Directory.GetDirectories(CollectionPath)
+                Dim dirInfo As New System.IO.DirectoryInfo(Dir)
+                sw.WriteLine(dirInfo.Name)
+            Next
+        End Using
+
+        'Check if a collection is already activated:
+        Dim CurrentlyEnabledFile As String
+        Dim CurrentlyEnabledCollectionName As String
+        If My.Computer.FileSystem.DirectoryExists(appdata + "\.minecraft\mods") Then
+            Dim Folder As New IO.DirectoryInfo(appdata + "\.minecraft\mods")
+
+            For Each File As IO.FileInfo In Folder.GetFiles("*.CollectionInfo", IO.SearchOption.AllDirectories)
+                If File.Name.ToString.Contains(".CollectionInfo") Then
+                    MsgBox(File.Name.ToString)
+                    CurrentlyEnabledFile = File.Name.ToString
+                    GoTo CheckDone
+                    Application.DoEvents()
+                End If
+            Next
+CheckDone:
+            MsgBox("Skipped to CheckDone")
+            Try
+                Dim currentLine As String
+                Dim Readlines As Integer = 0
+                Using sr As StreamReader = New StreamReader(appdata + "\.minecraft\mods\" + CurrentlyEnabledFile)
+Scan:
+                    If Not Readlines = 1 Then
+
+                        currentLine = sr.ReadLine.ToString
+                        If Readlines = 0 Then
+                            CurrentlyEnabledCollectionName = currentLine
+                            Readlines = Readlines + 1
+                            GoTo Scan
+                        End If
+                    End If
+                End Using
+            Catch ex As Exception
+                MsgBox("An Error ocurred when reading information from currently enabled Collection's .CollectionInfo File")
+                Return
+            End Try
+
+        End If
+        '
+
+        Return
     End Sub
 End Module

@@ -38,7 +38,7 @@ Partial Class CollectionView
         Me.RemoveAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MCversion = New System.Windows.Forms.Label()
         Me.ModCount = New System.Windows.Forms.Label()
-        Me.ActivateCollection = New System.Windows.Forms.Button()
+        Me.Activate = New System.Windows.Forms.Button()
         Me.CollectionView_RefreshButton = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -176,15 +176,15 @@ Partial Class CollectionView
         Me.ModCount.TabIndex = 21
         Me.ModCount.Text = "Mod Count: 0"
         '
-        'ActivateCollection
+        'Activate
         '
-        Me.ActivateCollection.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ActivateCollection.Location = New System.Drawing.Point(12, 547)
-        Me.ActivateCollection.Name = "ActivateCollection"
-        Me.ActivateCollection.Size = New System.Drawing.Size(1038, 37)
-        Me.ActivateCollection.TabIndex = 22
-        Me.ActivateCollection.Text = "Activate Collection (this will deactivate your current Collection)"
-        Me.ActivateCollection.UseVisualStyleBackColor = True
+        Me.Activate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Activate.Location = New System.Drawing.Point(12, 547)
+        Me.Activate.Name = "Activate"
+        Me.Activate.Size = New System.Drawing.Size(1038, 37)
+        Me.Activate.TabIndex = 22
+        Me.Activate.Text = "Activate Collection (this will deactivate your current Collection)"
+        Me.Activate.UseVisualStyleBackColor = True
         '
         'CollectionView_RefreshButton
         '
@@ -238,7 +238,7 @@ Partial Class CollectionView
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.CollectionView_RefreshButton)
-        Me.Controls.Add(Me.ActivateCollection)
+        Me.Controls.Add(Me.Activate)
         Me.Controls.Add(Me.ModCount)
         Me.Controls.Add(Me.MCversion)
         Me.Controls.Add(Me.ModList)
@@ -271,7 +271,7 @@ Partial Class CollectionView
     Public WithEvents ModList As CheckedListBox
     Public WithEvents MCversion As Label
     Public WithEvents ModCount As Label
-    Public WithEvents ActivateCollection As Button
+    Public WithEvents Activate As Button
     Public WithEvents CollectionView_RefreshButton As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Button3 As Button
