@@ -128,7 +128,11 @@ Scan:
     ''' <param name="BaseDirectory"></param>
     Public Sub Collection_SubDir_Lister(sender As Object, BaseDirectory As String, Shorten As Boolean)
         sender.SubDirectoriesList.items.clear
-        sender.ModList.items.clear
+        Try
+            sender.ModList.items.clear
+        Catch
+            'Sender Doesn't contain ModList
+        End Try
         For Each drvs In Directory.GetDirectories(BaseDirectory)
 
             If Shorten = True Then
@@ -165,7 +169,7 @@ Scan:
             End If
 
         Next
-
+        Return
     End Sub
 
     Public Sub FolderCheck(path As String)
@@ -239,32 +243,99 @@ Scan:
                 End Using
             Catch ex As Exception
                 MsgBox("An Error ocurred when reading information from currently enabled Collection's .CollectionInfo File")
-            Return
+                Return
             End Try
+
+            'Check if names match each other - if they don't something is wrong!
+            If Not My.Settings.CurrentlyActivated = CurrentlyEnabledCollectionName Then
+                'MsgBox("Something may be wrong! - CompareNames has failed - two different collections appear to be activated? Maybe try deleteing C:\Tfff1\Simple_MC\Mod_Collections NOTE: Deleting this folder will delete all of your collections.")
+                'Activation.PermittedClose = True
+                'Activation.Close()
+                'CollectionView.Close()
+                'Return
+                My.Settings.CurrentlyActivated = CurrentlyEnabledCollectionName
+                My.Settings.Save()
+            End If
 
             'Now Deactivate The Collection
             If CurrentlyEnabledCollectionName = My.Settings.SelectedCollection Then
-                MsgBox("All folders will be synced")
-                Call SyncCollections()
+                MsgBox("New Changes will be synced - Please Note: Changes to all folders except Saves and config in the .minecraft version of this Collection will be lost")
             Else
-                MsgBox("The Collection: " + CurrentlyEnabledCollectionName + " will be deactivated")
-                'Deactivate Collection - saving changes to 'saves' and 'config' folders
-                Dim linecount As Integer
-                linecount = File.ReadAllLines(appdata + "\.minecraft\mods\folder.txt").Length
-                Using sr As StreamReader = New StreamReader(appdata + "\.minecraft\mods\folder.txt")
-readfolders:
-                    If linecount > 0 Then
-                        sender.FolderList.Items.Add(sr.ReadLine().ToString)
-                        linecount = linecount - 1
-                        GoTo readfolders
-                    End If
-                End Using
-
-                'Sync Each folder
-
+                MsgBox("The Collection: " + My.Settings.CurrentlyActivated.ToString + " will be deactivated")
             End If
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            'Deactivate Current Collection
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+            'Deactivate Collection - saving changes to 'saves' and 'config' folders
+            Dim linecount As Integer
+            linecount = File.ReadAllLines(appdata + "\.minecraft\mods\folders.txt").Length
+            Using sr As StreamReader = New StreamReader(appdata + "\.minecraft\mods\folders.txt")
+readfolders:
+                If linecount > 0 Then
+                    sender.FolderList.Items.Add(sr.ReadLine().ToString)
+                    linecount = linecount - 1
+                    GoTo readfolders
+                End If
+            End Using
+
+            'Delete all folders except Saves & Config:
+            For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
+                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                    If Not l_text.ToString.Contains("saves") Or Not l_text.ToString.Contains("config") Then
+                    My.Computer.FileSystem.DeleteDirectory(appdata + "\.minecraft\" + l_text, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                    'Add to the Special Directories List - to be removed from this list later:
+                    sender.SpecialDirectoriesList.items.add(l_text)
+                    End If
+                Next
+                'Read the Special Directories List and remove all the items in it from the Main List - FolderList
+                For l_index As Integer = 0 To sender.SpecialDirectoriesList.Items.Count - 1
+                    Dim l_text As String = CStr(sender.SpecialDirectoriesList.Items(l_index))
+                    sender.FolderList.items.remove(l_text)
+                Next
+                'Clear the SpecialDirectoriesList for next time
+                sender.SpecialDirectoriesList.items.clear
+
+                'Sync Saves & Config:
+                'Will copy items to their parent folder in the non-enabled copy of the Collection, overwriting the one that's already there if the name clashes. Then will remove the saves folder from .minecraft
+
+                'Found at: http://stackoverflow.com/questions/12755701/vb-net-getting-each-item-in-a-listbox-and-finding-its-text-index
+                For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
+                    'Get the subDirectories
+                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                    'Add them to the listbox in Activation:
+                    Call Collection_SubDir_Lister(Activation, appdata + "\.minecraft\" + l_text, True)
+                    'From the listbox in Activation, sync the subDirectories, then move on:
+                    For l_index2 As Integer = 0 To sender.SubDirectoriesList.Items.Count - 1
+                        Dim l_text2 As String = CStr(sender.SubDirectoriesList.Items(l_index2))
+                        My.Computer.FileSystem.CopyDirectory(appdata + "\.minecraft\" + l_text + "\" + l_text2, "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.CurrentlyActivated + "\" + l_text + "\" + l_text2, True)
+                        sender.SuccessList.items.add("Synced: " + l_text2 + "from in " + l_text)
+                    Next
+                    'Clear the SubDirectories List and Add Success messsage to Successlist
+                    sender.SubDirectoriesList.items.clear
+                    sender.SuccessList.items.add("Finished Syncing Folder: " + l_text)
+
+                Next
+                sender.SuccessList.items.add("Finished Syncing Config and Saves Folders")
+                'Delete Config & Saves from .minecraft
+                For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
+                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                My.Computer.FileSystem.DeleteDirectory(appdata + "\.minecraft\" + l_text, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                sender.SuccessList.items.add("Deleted Folder: " + l_text + " from .minecraft folder")
+                Next
+                sender.SuccessList.items.add("Finished Syncing Activated Folders from .minecraft")
+                sender.FolderList.items.clear
+            sender.SubDirectoriesList.items.clear
+            sender.SpecialDirectoriesList.items.clear
+            sender.successList.items.add("Finished Clean up after De-Activation of Collection: " + My.Settings.CurrentlyActivated)
+                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                'BEGIN ACTIVATION OF NEW COLLECTION
+                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Call FirstCollectionPush(sender)
+            'End If
         Else
-            Call FirstCollectionPush
+            Call FirstCollectionPush(sender)
         End If
         '
 
@@ -273,10 +344,12 @@ readfolders:
 
     Public Sub SyncCollections()
         'Called if a collection is activated and changes have been made to the non .minecraft version. Will Overwrite everything in .minecraft except saves and config, saves and config will be synced properly.
-
+        '
+        'UNNEEDED - The combination of ActivateCollection (deletes the collection) & FirstCollectionPush (Activates a new collection) do the same job as this would
+        '
     End Sub
 
-    Public Sub FirstCollectionPush()
+    Public Sub FirstCollectionPush(sender As Object)
         Dim appdata = My.Settings.appdata
         Dim CollectionPath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection
 
@@ -286,7 +359,7 @@ readfolders:
         Using sr As StreamReader = New StreamReader(CollectionPath + "\mods\folders.txt")
 readfolders:
             If linecount > 0 Then
-                Activation.FolderList.Items.Add(sr.ReadLine().ToString)
+                sender.FolderList.Items.Add(sr.ReadLine().ToString)
                 linecount = linecount - 1
                 GoTo readfolders
             End If
@@ -308,7 +381,10 @@ readfolders:
             sw.WriteLine(My.Settings.SelectedCollection)
         End Using
 
-        MsgBox("Collection Active! Remember to Launch Minecraft with your modloader for Minecraft: " + My.Settings.SelectedCollection_MCversion)
+        My.Settings.CurrentlyActivated = My.Settings.SelectedCollection
+        My.Settings.Save()
+
+        MsgBox("Collection: " + My.Settings.CurrentlyActivated + " Active! Remember to Launch Minecraft with your modloader for Minecraft: " + My.Settings.SelectedCollection_MCversion)
         Activation.PermittedClose = True
         Activation.Close()
     End Sub

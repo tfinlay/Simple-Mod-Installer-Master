@@ -97,4 +97,7 @@ Public Class EntryMenu
         End If
     End Function
 
+    Private Sub EntryMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
+    End Sub
 End Class

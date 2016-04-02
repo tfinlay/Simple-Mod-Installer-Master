@@ -63,7 +63,7 @@ Partial Class CollectionView
         Me.LinkLabel1.BackColor = System.Drawing.Color.Transparent
         Me.LinkLabel1.ForeColor = System.Drawing.Color.White
         Me.LinkLabel1.LinkColor = System.Drawing.Color.LightCoral
-        Me.LinkLabel1.Location = New System.Drawing.Point(14, 534)
+        Me.LinkLabel1.Location = New System.Drawing.Point(14, 525)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(201, 13)
         Me.LinkLabel1.TabIndex = 14
@@ -75,7 +75,7 @@ Partial Class CollectionView
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(35, 521)
+        Me.Label3.Location = New System.Drawing.Point(35, 512)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(136, 13)
         Me.Label3.TabIndex = 13
@@ -86,7 +86,7 @@ Partial Class CollectionView
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(63, 508)
+        Me.Label4.Location = New System.Drawing.Point(63, 499)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(84, 13)
         Me.Label4.TabIndex = 12

@@ -38,6 +38,7 @@ Public Class CollectionView
         'CompareTitles can be toggled on and off in settings: listed as "Safer Collections"
         Call Collection_CompareTitles(Me, My.Settings.compareTitles)
         'Gets Number of Mods in listbox:
+        'Found At: http://stackoverflow.com/questions/12755701/vb-net-getting-each-item-in-a-listbox-and-finding-its-text-index
         For l_index As Integer = 0 To ModList.Items.Count - 1
             Dim l_text As String = CStr(ModList.Items(l_index))
             ModInt = ModInt + 1
