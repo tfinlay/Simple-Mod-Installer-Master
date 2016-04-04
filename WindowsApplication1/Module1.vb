@@ -41,4 +41,10 @@ Module module1
         Return
     End Sub
 
+    Public Function testmsg(message As String)
+        If My.Settings.TestEnvironment = True Then
+            MsgBox(message)
+        End If
+    End Function
+
 End Module

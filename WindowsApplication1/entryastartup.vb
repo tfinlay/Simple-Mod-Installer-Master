@@ -3,6 +3,7 @@ Public Class EntryMenu
     Public appdata
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        testmsg("Test Environment is set to true!")
         appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         Dim minecraftfolder As String
         minecraftfolder = appdata & "\.minecraft"

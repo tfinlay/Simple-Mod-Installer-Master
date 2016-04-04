@@ -47,6 +47,8 @@ Public Class CollectionView
 
         'Enable Changes once Loading Finished:
         Text = "Edit Collection - " + Title.Text
+        Button4.Text = "View Disabled Mods"
+        Button2.Text = "Disable Selected"
         Enabled = True
     End Sub
 
@@ -146,9 +148,10 @@ Public Class CollectionView
             'DelMod.Enabled = False
             Button4.Text = "View Enabled Mods"
             'Enable Changes once Loading Finished:
+            Button2.Text = "Enable Selected"
             Enabled = True
         Else
-            AddMods.Enabled = True
+            AddMod.Enabled = True
             'DelMod.Enabled = True
             Button4.Text = "View Disabled Mods"
             Call Load_Manager()
@@ -156,35 +159,69 @@ Public Class CollectionView
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        ModInt2 = 0
-        For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
-            Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+        If Button2.Text = "Disable Selected" Then
+            ModInt2 = 0
+            For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text As String = CStr(ModList.CheckedItems(l_index))
 
-            Dim currentLocation As String = Path + "\mods\" + l_text
-            Dim CurrentLocation2 As String = Path + "\mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
-            Dim EndLocation As String = Path + "\DisabledMods\" + l_text
-            Dim EndLocation2 As String = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                Dim currentLocation As String = Path + "\mods\" + l_text
+                Dim CurrentLocation2 As String = Path + "\mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                Dim EndLocation As String = Path + "\DisabledMods\" + l_text
+                Dim EndLocation2 As String = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
 
-            If My.Computer.FileSystem.FileExists(currentLocation) Then
-                Try
-                    My.Computer.FileSystem.MoveFile(currentLocation, EndLocation)
-                    ModInt2 = ModInt2 + 1
-                Catch
-                    MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
-                End Try
-            ElseIf File.Exists(CurrentLocation2) Then
-                Try
-                    My.Computer.FileSystem.MoveFile(CurrentLocation2, EndLocation2)
-                    ModInt2 = ModInt2 + 1
-                Catch
-                    MsgBox("Failed to Move file: " + l_text + " maybe it doesn't exist anymore?")
-                End Try
-            Else
-                MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
-            End If
-        Next
-        MsgBox("Successfully Disabled " + ModInt2.ToString + " mods from collection")
-        Call Load_Manager()
+                If My.Computer.FileSystem.FileExists(currentLocation) Then
+                    Try
+                        My.Computer.FileSystem.MoveFile(currentLocation, EndLocation)
+                        ModInt2 = ModInt2 + 1
+                    Catch
+                        MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+                    End Try
+                ElseIf File.Exists(CurrentLocation2) Then
+                    Try
+                        My.Computer.FileSystem.MoveFile(CurrentLocation2, EndLocation2)
+                        ModInt2 = ModInt2 + 1
+                    Catch
+                        MsgBox("Failed to Move file: " + l_text + " maybe it doesn't exist anymore?")
+                    End Try
+                Else
+                    MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
+                End If
+            Next
+            MsgBox("Successfully Disabled " + ModInt2.ToString + " mods from collection")
+            Call Load_Manager()
+        Else
+            'If it says Enable Selected
+            ModInt2 = 0
+            For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+
+                Dim currentLocation As String = Path + "\DisabledMods\" + l_text
+                Dim CurrentLocation2 As String = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                Dim EndLocation As String = Path + "\Mods\" + l_text
+                Dim EndLocation2 As String = Path + "\Mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+
+                If My.Computer.FileSystem.FileExists(currentLocation) Then
+                    Try
+                        My.Computer.FileSystem.MoveFile(currentLocation, EndLocation)
+                        ModInt2 = ModInt2 + 1
+                    Catch
+                        MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+                    End Try
+                ElseIf File.Exists(CurrentLocation2) Then
+                    Try
+                        My.Computer.FileSystem.MoveFile(CurrentLocation2, EndLocation2)
+                        ModInt2 = ModInt2 + 1
+                    Catch
+                        MsgBox("Failed to Move file: " + l_text + " maybe it doesn't exist anymore?")
+                    End Try
+                Else
+                    MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
+                End If
+            Next
+            MsgBox("Successfully Enabled " + ModInt2.ToString + " mods from collection")
+            Call Load_Manager()
+        End If
+
     End Sub
 
     Private Sub ActivateCollection_Click(sender As Object, e As EventArgs) Handles Activate.Click
@@ -195,5 +232,14 @@ Public Class CollectionView
         Activation.Show()
 
         Call ActivateCollection(Activation)
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        MsgBox("This has not been added yet - sorry!")
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Enabled = False
+        ExportToModpack.Show()
     End Sub
 End Class

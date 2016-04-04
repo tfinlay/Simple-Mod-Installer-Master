@@ -45,6 +45,7 @@ Partial Class CollectionView
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -230,12 +231,22 @@ Partial Class CollectionView
         '
         'Button5
         '
+        Me.Button5.Enabled = False
         Me.Button5.Location = New System.Drawing.Point(745, 16)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(156, 34)
         Me.Button5.TabIndex = 27
         Me.Button5.Text = "Details"
         Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(12, 42)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(156, 23)
+        Me.Button6.TabIndex = 28
+        Me.Button6.Text = "Export as Technic Modpack"
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'CollectionView
         '
@@ -244,6 +255,7 @@ Partial Class CollectionView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1062, 596)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button4)
@@ -293,4 +305,5 @@ Partial Class CollectionView
     Friend WithEvents Button4 As Button
     Public WithEvents Button2 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Button6 As Button
 End Class

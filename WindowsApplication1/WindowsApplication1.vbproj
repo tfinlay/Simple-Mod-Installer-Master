@@ -122,6 +122,18 @@
     <Compile Include="Collection\Collection_MissingInfo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Collection\Export\ExportToModpack.Designer.vb">
+      <DependentUpon>ExportToModpack.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\Export\ExportToModpack.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Collection\Export\SelectForgeVersion.Designer.vb">
+      <DependentUpon>SelectForgeVersion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\Export\SelectForgeVersion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Collection\FolderView.Designer.vb">
       <DependentUpon>FolderView.vb</DependentUpon>
     </Compile>
@@ -230,6 +242,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Collection\Collection_MissingInfo.resx">
       <DependentUpon>Collection_MissingInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\Export\ExportToModpack.resx">
+      <DependentUpon>ExportToModpack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\Export\SelectForgeVersion.resx">
+      <DependentUpon>SelectForgeVersion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Collection\FolderView.resx">
       <DependentUpon>FolderView.vb</DependentUpon>

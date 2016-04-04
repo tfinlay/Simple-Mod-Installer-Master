@@ -282,57 +282,57 @@ readfolders:
 
             'Delete all folders except Saves & Config:
             For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
-                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
-                    If Not l_text.ToString.Contains("saves") Or Not l_text.ToString.Contains("config") Then
+                Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                If Not l_text.ToString.Contains("saves") Or Not l_text.ToString.Contains("config") Then
                     My.Computer.FileSystem.DeleteDirectory(appdata + "\.minecraft\" + l_text, FileIO.DeleteDirectoryOption.DeleteAllContents)
                     'Add to the Special Directories List - to be removed from this list later:
                     sender.SpecialDirectoriesList.items.add(l_text)
-                    End If
-                Next
-                'Read the Special Directories List and remove all the items in it from the Main List - FolderList
-                For l_index As Integer = 0 To sender.SpecialDirectoriesList.Items.Count - 1
-                    Dim l_text As String = CStr(sender.SpecialDirectoriesList.Items(l_index))
-                    sender.FolderList.items.remove(l_text)
-                Next
-                'Clear the SpecialDirectoriesList for next time
-                sender.SpecialDirectoriesList.items.clear
+                End If
+            Next
+            'Read the Special Directories List and remove all the items in it from the Main List - FolderList
+            For l_index As Integer = 0 To sender.SpecialDirectoriesList.Items.Count - 1
+                Dim l_text As String = CStr(sender.SpecialDirectoriesList.Items(l_index))
+                sender.FolderList.items.remove(l_text)
+            Next
+            'Clear the SpecialDirectoriesList for next time
+            sender.SpecialDirectoriesList.items.clear
 
-                'Sync Saves & Config:
-                'Will copy items to their parent folder in the non-enabled copy of the Collection, overwriting the one that's already there if the name clashes. Then will remove the saves folder from .minecraft
+            'Sync Saves & Config:
+            'Will copy items to their parent folder in the non-enabled copy of the Collection, overwriting the one that's already there if the name clashes. Then will remove the saves folder from .minecraft
 
-                'Found at: http://stackoverflow.com/questions/12755701/vb-net-getting-each-item-in-a-listbox-and-finding-its-text-index
-                For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
-                    'Get the subDirectories
-                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
-                    'Add them to the listbox in Activation:
-                    Call Collection_SubDir_Lister(Activation, appdata + "\.minecraft\" + l_text, True)
-                    'From the listbox in Activation, sync the subDirectories, then move on:
-                    For l_index2 As Integer = 0 To sender.SubDirectoriesList.Items.Count - 1
-                        Dim l_text2 As String = CStr(sender.SubDirectoriesList.Items(l_index2))
-                        My.Computer.FileSystem.CopyDirectory(appdata + "\.minecraft\" + l_text + "\" + l_text2, "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.CurrentlyActivated + "\" + l_text + "\" + l_text2, True)
-                        sender.SuccessList.items.add("Synced: " + l_text2 + "from in " + l_text)
-                    Next
-                    'Clear the SubDirectories List and Add Success messsage to Successlist
-                    sender.SubDirectoriesList.items.clear
-                    sender.SuccessList.items.add("Finished Syncing Folder: " + l_text)
-
+            'Found at: http://stackoverflow.com/questions/12755701/vb-net-getting-each-item-in-a-listbox-and-finding-its-text-index
+            For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
+                'Get the subDirectories
+                Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                'Add them to the listbox in Activation:
+                Call Collection_SubDir_Lister(Activation, appdata + "\.minecraft\" + l_text, True)
+                'From the listbox in Activation, sync the subDirectories, then move on:
+                For l_index2 As Integer = 0 To sender.SubDirectoriesList.Items.Count - 1
+                    Dim l_text2 As String = CStr(sender.SubDirectoriesList.Items(l_index2))
+                    My.Computer.FileSystem.CopyDirectory(appdata + "\.minecraft\" + l_text + "\" + l_text2, "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.CurrentlyActivated + "\" + l_text + "\" + l_text2, True)
+                    sender.SuccessList.items.add("Synced: " + l_text2 + "from in " + l_text)
                 Next
-                sender.SuccessList.items.add("Finished Syncing Config and Saves Folders")
-                'Delete Config & Saves from .minecraft
-                For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
-                    Dim l_text As String = CStr(sender.FolderList.Items(l_index))
+                'Clear the SubDirectories List and Add Success messsage to Successlist
+                sender.SubDirectoriesList.items.clear
+                sender.SuccessList.items.add("Finished Syncing Folder: " + l_text)
+
+            Next
+            sender.SuccessList.items.add("Finished Syncing Config and Saves Folders")
+            'Delete Config & Saves from .minecraft
+            For l_index As Integer = 0 To sender.FolderList.Items.Count - 1
+                Dim l_text As String = CStr(sender.FolderList.Items(l_index))
                 My.Computer.FileSystem.DeleteDirectory(appdata + "\.minecraft\" + l_text, FileIO.DeleteDirectoryOption.DeleteAllContents)
                 sender.SuccessList.items.add("Deleted Folder: " + l_text + " from .minecraft folder")
-                Next
-                sender.SuccessList.items.add("Finished Syncing Activated Folders from .minecraft")
-                sender.FolderList.items.clear
+            Next
+            sender.SuccessList.items.add("Finished Syncing Activated Folders from .minecraft")
+            sender.FolderList.items.clear
             sender.SubDirectoriesList.items.clear
             sender.SpecialDirectoriesList.items.clear
             sender.successList.items.add("Finished Clean up after De-Activation of Collection: " + My.Settings.CurrentlyActivated)
-                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                'BEGIN ACTIVATION OF NEW COLLECTION
-                '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Call FirstCollectionPush(sender)
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            'BEGIN ACTIVATION OF NEW COLLECTION
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            Call FirstCollectionPush(sender)
             'End If
         Else
             Call FirstCollectionPush(sender)
