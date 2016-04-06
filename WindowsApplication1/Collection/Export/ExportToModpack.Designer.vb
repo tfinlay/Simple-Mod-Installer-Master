@@ -42,6 +42,7 @@ Partial Class ExportToModpack
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.HiddenListBox = New System.Windows.Forms.CheckedListBox()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.SuspendLayout()
         '
         'ExportButton
@@ -216,12 +217,19 @@ Partial Class ExportToModpack
         '
         'HiddenListBox
         '
+        Me.HiddenListBox.Enabled = False
         Me.HiddenListBox.FormattingEnabled = True
-        Me.HiddenListBox.Location = New System.Drawing.Point(81, 9)
+        Me.HiddenListBox.Location = New System.Drawing.Point(69, 13)
         Me.HiddenListBox.Name = "HiddenListBox"
-        Me.HiddenListBox.Size = New System.Drawing.Size(113, 19)
+        Me.HiddenListBox.Size = New System.Drawing.Size(95, 19)
         Me.HiddenListBox.TabIndex = 18
         Me.HiddenListBox.Visible = False
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "zip"
+        Me.SaveFileDialog1.Filter = "Zip Files(*.zip)|*.zip"
+        Me.SaveFileDialog1.Title = "Where would you like to save your Modpack?"
         '
         'ExportToModpack
         '
@@ -276,4 +284,5 @@ Partial Class ExportToModpack
     Public WithEvents IncludedFoldersList As CheckedListBox
     Public WithEvents ExcludedFoldersList As CheckedListBox
     Friend WithEvents HiddenListBox As CheckedListBox
+    Public WithEvents SaveFileDialog1 As SaveFileDialog
 End Class

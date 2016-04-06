@@ -27,7 +27,7 @@ Public NotInheritable Class startsplash
         If Not Directory.Exists("C:\Tfff1\Simple_MC\Mod_Collections_Export") Then
             My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
         Else
-            Directory.Delete("C:\Tfff1\Simple_MC\Mod_Collections_Export")
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", FileIO.DeleteDirectoryOption.DeleteAllContents)
             My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
         End If
 
