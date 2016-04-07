@@ -2,6 +2,24 @@
     Public closeform As Boolean
     Public Path As String = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection
 
+    Public Sub Collection_FolderView_LoadManager()
+        Enabled = False
+        closeform = False
+        Dim Selected As String
+        Try
+            Selected = SubDirectoriesList.SelectedItem.ToString
+        Catch
+        End Try
+        Call Collection_SubDir_Lister(Me, Path, True)
+
+        Try
+            SubDirectoriesList.SelectedItem = Selected
+        Catch ex As Exception
+        End Try
+
+        Enabled = True
+    End Sub
+
     Private Sub FolderView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         CollectionView.Enabled = True
         CollectionView.CollectionView_RefreshButton.PerformClick()
@@ -19,14 +37,6 @@
 
     Private Sub Refresh_Button_Click(sender As Object, e As EventArgs) Handles Refresh_Button.Click
         Call Collection_FolderView_LoadManager()
-    End Sub
-
-    Public Sub Collection_FolderView_LoadManager()
-        Enabled = False
-        closeform = False
-
-        Call Collection_SubDir_Lister(Me, Path, True)
-        Enabled = True
     End Sub
 
     Private Sub Back_Button_Click(sender As Object, e As EventArgs) Handles Back_Button.Click
@@ -60,19 +70,14 @@
     End Sub
 
     Private Sub DelFile_Click(sender As Object, e As EventArgs) Handles DelFile.Click
-        If Not ModList.SelectedItem.ToString = "" Then
-            Dim selectedFile = Path + "\" + SubDirectoriesList.SelectedItem + "\" + ModList.SelectedItem.ToString
-            If My.Computer.FileSystem.FileExists(selectedFile) Then
-                Try
-                    My.Computer.FileSystem.DeleteFile(selectedFile)
-                    Call Collection_FolderView_LoadManager()
-                Catch ex As Exception
-                    MsgBox("Failed to delete file: " + ModList.SelectedItem.ToString + "Maybe it's already been deleted? Try Clicking the refresh button.")
-                End Try
-            End If
-        Else
-            MsgBox("Please select an item to delete.")
-        End If
+
+        For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+            Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+            My.Computer.FileSystem.DeleteFile(Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text)
+        Next
+
+        Call Collection_FolderView_LoadManager()
+
     End Sub
 
     Private Sub EditFile_Click(sender As Object, e As EventArgs) Handles EditFile.Click
