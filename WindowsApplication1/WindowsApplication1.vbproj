@@ -140,6 +140,12 @@
     <Compile Include="Collection\FolderView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Collection\ImportFolder.Designer.vb">
+      <DependentUpon>ImportFolder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Collection\ImportFolder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Collection\NameFolder.Designer.vb">
       <DependentUpon>NameFolder.vb</DependentUpon>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Collection\FolderView.resx">
       <DependentUpon>FolderView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Collection\ImportFolder.resx">
+      <DependentUpon>ImportFolder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Collection\NameFolder.resx">
       <DependentUpon>NameFolder.vb</DependentUpon>

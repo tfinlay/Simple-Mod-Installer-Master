@@ -140,4 +140,9 @@
             MsgBox("An error ocurred")
         End Try
     End Sub
+
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+        Enabled = False
+        ImportFolder.Show()
+    End Sub
 End Class

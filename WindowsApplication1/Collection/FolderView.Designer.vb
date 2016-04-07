@@ -30,17 +30,20 @@ Partial Class FolderView
         Me.AddFile = New System.Windows.Forms.Button()
         Me.DelFile = New System.Windows.Forms.Button()
         Me.EditFile = New System.Windows.Forms.Button()
-        Me.ModList = New System.Windows.Forms.ListBox()
         Me.AddFolder = New System.Windows.Forms.Button()
         Me.Back_Button = New System.Windows.Forms.Button()
         Me.Refresh_Button = New System.Windows.Forms.Button()
         Me.delfolder = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.openFolder = New System.Windows.Forms.Button()
+        Me.ModList = New System.Windows.Forms.CheckedListBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'SubDirectoriesList
         '
+        Me.SubDirectoriesList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.SubDirectoriesList.FormattingEnabled = True
         Me.SubDirectoriesList.Location = New System.Drawing.Point(12, 91)
         Me.SubDirectoriesList.Name = "SubDirectoriesList"
@@ -49,6 +52,8 @@ Partial Class FolderView
         '
         'Label1
         '
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -61,6 +66,8 @@ Partial Class FolderView
         '
         'Label2
         '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -73,6 +80,7 @@ Partial Class FolderView
         '
         'AddFile
         '
+        Me.AddFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AddFile.Location = New System.Drawing.Point(362, 63)
         Me.AddFile.Name = "AddFile"
         Me.AddFile.Size = New System.Drawing.Size(75, 23)
@@ -82,6 +90,7 @@ Partial Class FolderView
         '
         'DelFile
         '
+        Me.DelFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DelFile.Location = New System.Drawing.Point(443, 63)
         Me.DelFile.Name = "DelFile"
         Me.DelFile.Size = New System.Drawing.Size(104, 23)
@@ -91,6 +100,7 @@ Partial Class FolderView
         '
         'EditFile
         '
+        Me.EditFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.EditFile.Location = New System.Drawing.Point(553, 63)
         Me.EditFile.Name = "EditFile"
         Me.EditFile.Size = New System.Drawing.Size(165, 23)
@@ -98,21 +108,13 @@ Partial Class FolderView
         Me.EditFile.Text = "Edit Selected File"
         Me.EditFile.UseVisualStyleBackColor = True
         '
-        'ModList
-        '
-        Me.ModList.FormattingEnabled = True
-        Me.ModList.Location = New System.Drawing.Point(362, 91)
-        Me.ModList.Name = "ModList"
-        Me.ModList.Size = New System.Drawing.Size(356, 329)
-        Me.ModList.TabIndex = 8
-        '
         'AddFolder
         '
         Me.AddFolder.Location = New System.Drawing.Point(12, 63)
         Me.AddFolder.Name = "AddFolder"
-        Me.AddFolder.Size = New System.Drawing.Size(95, 23)
+        Me.AddFolder.Size = New System.Drawing.Size(85, 23)
         Me.AddFolder.TabIndex = 9
-        Me.AddFolder.Text = "Add New Folder"
+        Me.AddFolder.Text = "Create Folder"
         Me.AddFolder.UseVisualStyleBackColor = True
         '
         'Back_Button
@@ -135,7 +137,7 @@ Partial Class FolderView
         '
         'delfolder
         '
-        Me.delfolder.Location = New System.Drawing.Point(113, 62)
+        Me.delfolder.Location = New System.Drawing.Point(195, 63)
         Me.delfolder.Name = "delfolder"
         Me.delfolder.Size = New System.Drawing.Size(78, 23)
         Me.delfolder.TabIndex = 12
@@ -148,26 +150,47 @@ Partial Class FolderView
         '
         'openFolder
         '
-        Me.openFolder.Location = New System.Drawing.Point(198, 61)
+        Me.openFolder.Location = New System.Drawing.Point(103, 37)
         Me.openFolder.Name = "openFolder"
         Me.openFolder.Size = New System.Drawing.Size(75, 23)
         Me.openFolder.TabIndex = 13
         Me.openFolder.Text = "Open Folder"
         Me.openFolder.UseVisualStyleBackColor = True
         '
+        'ModList
+        '
+        Me.ModList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ModList.FormattingEnabled = True
+        Me.ModList.Location = New System.Drawing.Point(362, 93)
+        Me.ModList.Name = "ModList"
+        Me.ModList.Size = New System.Drawing.Size(356, 334)
+        Me.ModList.TabIndex = 14
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(102, 63)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(86, 23)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "Import Folder"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FolderView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(730, 434)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(730, 439)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.ModList)
         Me.Controls.Add(Me.openFolder)
         Me.Controls.Add(Me.delfolder)
         Me.Controls.Add(Me.Refresh_Button)
         Me.Controls.Add(Me.Back_Button)
         Me.Controls.Add(Me.AddFolder)
-        Me.Controls.Add(Me.ModList)
         Me.Controls.Add(Me.EditFile)
         Me.Controls.Add(Me.DelFile)
         Me.Controls.Add(Me.AddFile)
@@ -175,9 +198,7 @@ Partial Class FolderView
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SubDirectoriesList)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
         Me.Name = "FolderView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "View Modded Folders"
@@ -191,11 +212,12 @@ Partial Class FolderView
     Public WithEvents AddFile As Button
     Public WithEvents DelFile As Button
     Public WithEvents EditFile As Button
-    Public WithEvents ModList As ListBox
     Public WithEvents AddFolder As Button
     Public WithEvents Back_Button As Button
     Public WithEvents Refresh_Button As Button
     Friend WithEvents delfolder As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents openFolder As Button
+    Public WithEvents ModList As CheckedListBox
+    Friend WithEvents Button1 As Button
 End Class

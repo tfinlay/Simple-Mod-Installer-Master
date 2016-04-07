@@ -46,38 +46,51 @@
         ElseIf FolderAdd.Checked = True Then
             If Not FolderPath.Text = "" Then
 
-                For l_index As Integer = 0 To ModList.Items.Count - 1
-                    Dim l_text As String = CStr(ModList.Items(l_index))
-                    Dim FinishedPath
-                    Dim CurrentPath
+                'For l_index As Integer = 0 To ModList.Items.Count - 1
+                '    Dim l_text As String = CStr(ModList.Items(l_index))
+                '    Dim FinishedPath
+                '    Dim CurrentPath
 
-                    CurrentPath = FolderPath.Text + "\" + l_text
+                '    CurrentPath = FolderPath.Text + "\" + l_text
 
-                    If My.Computer.FileSystem.FileExists(CurrentPath) Then
-                        FinishedPath = BasePath + l_text
+                '    If My.Computer.FileSystem.FileExists(CurrentPath) Then
+                '        FinishedPath = BasePath + l_text
 
-                        If Not My.Computer.FileSystem.FileExists(FinishedPath) Then
-                            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
-                            modcount = modcount + 1
-                        Else
-                            MsgBox("File: " + l_text + " could not be added because it already exists in your collection.")
-                        End If
+                '        If Not My.Computer.FileSystem.FileExists(FinishedPath) Then
+                '            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
+                '            modcount = modcount + 1
+                '        Else
+                '            MsgBox("File: " + l_text + " could not be added because it already exists in your collection.")
+                '        End If
 
-                    Else
-                        CurrentPath = FolderPath.Text + "\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
-                        FinishedPath = BasePath + My.Settings.SelectedCollection_MCversion + "\" + l_text
-                        Try
-                            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
-                            modcount = modcount + 1
-                        Catch
-                            MsgBox("Failed to copy file:" + CurrentPath + "to new location as: " + FinishedPath)
-                        End Try
-                    End If
+                '    Else
+                '        CurrentPath = FolderPath.Text + "\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                '        FinishedPath = BasePath + My.Settings.SelectedCollection_MCversion + "\" + l_text
+                '        Try
+                '            My.Computer.FileSystem.CopyFile(CurrentPath, FinishedPath)
+                '            modcount = modcount + 1
+                '        Catch
+                '            MsgBox("Failed to copy file:" + CurrentPath + "to new location as: " + FinishedPath)
+                '        End Try
+                '    End If
+                'Next
 
+                'Version 2: Aim - Remove Error if files aren't in main folder or a subfolder called the MCVersion Number:
 
-                Next
+                Dim CurrentPath
+                Dim FinishedPath
 
-                MsgBox("Successfully added " + modcount.ToString + " file(s) to your collection")
+                CurrentPath = FolderPath.Text.ToString
+                FinishedPath = My.Settings.AddFiles_BasePath
+
+                Try
+                    My.Computer.FileSystem.CopyDirectory(CurrentPath, FinishedPath)
+                Catch
+                    MsgBox("AN ERROR OCCURRED WHEN IMPORTING THIS FOLDER! P.S.: This is bad")
+                    Close()
+                End Try
+
+                MsgBox("Successfully added file(s) to your collection")
                 Close()
 
 
@@ -153,5 +166,9 @@
 
 
         End If
+    End Sub
+
+    Private Sub AddMods_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

@@ -104,7 +104,7 @@ Public Class ExportToModpack
                 My.Computer.FileSystem.CopyFile(JarPath.Text.ToString, "C:\Tfff1\Simple_MC\Mod_Collection_export\bin\modpack.jar", True)
             Catch ex As Exception
                 MsgBox("Failed to copy Universal Forge Jar. Something is horribly wrong, try again later")
-                GoTo finish
+                'GoTo finish
             End Try
 
             For l_index As Integer = 0 To IncludedFoldersList.Items.Count - 1
@@ -131,19 +131,19 @@ Stage2: 'Cleans up the Directory after the Collection has been exported:
         End Try
 finish:
         Enabled = True
+        MsgBox("Done!")
     End Sub
 
     Private Sub SaveFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
         Dim outpath As String = SaveFileDialog1.FileName
         testmsg("Outpath = " + outpath)
 Check:
-        If My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Mod_Collection_export\bin\modpack.jar") Then
-            ZipFile.CreateFromDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", outpath)
-            Call ExportCollection(2)
-        Else
+        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Mod_Collection_export\bin\modpack.jar") Then
             GoTo Check
         End If
 
+        ZipFile.CreateFromDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", outpath)
+        Call ExportCollection(2)
 
     End Sub
 
