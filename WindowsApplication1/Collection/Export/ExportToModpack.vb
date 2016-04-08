@@ -91,11 +91,11 @@ Public Class ExportToModpack
         If Not JarPath.Text.ToString = "" Then
 
             'Set up the Temporary Environment:
-            If Not My.Computer.FileSystem.DirectoryExists("C:\Tfff1\Simple_MC\Mod_Collections_Export") Then
-                My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
+            If Not My.Computer.FileSystem.DirectoryExists("C:\Tfff1\Simple_MC\Mod_Collection_Export") Then
+                My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export")
             Else
-                My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", FileIO.DeleteDirectoryOption.DeleteAllContents)
-                My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
+                My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export", FileIO.DeleteDirectoryOption.DeleteAllContents)
+                My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export")
             End If
 
             My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export\bin")
@@ -110,10 +110,10 @@ Public Class ExportToModpack
             For l_index As Integer = 0 To IncludedFoldersList.Items.Count - 1
                 Dim l_text As String = CStr(IncludedFoldersList.Items(l_index))
                 Try
-                    My.Computer.FileSystem.CopyDirectory(CollectionView.Path.ToString + "\" + l_text, "C:\Tfff1\Simple_MC\Mod_Collections_Export\" + l_text)
+                    My.Computer.FileSystem.CopyDirectory(CollectionView.Path.ToString + "\" + l_text, "C:\Tfff1\Simple_MC\Mod_Collection_Export\" + l_text)
                 Catch ex As Exception
                     Enabled = True
-                    MsgBox("An Error Occurred when copying Folder: " + CollectionView.Path.ToString + "\" + l_text + "to: " + "C:\Tfff1\Simple_MC\Mod_Collections_Export\" + l_text + ". Export has been Cancelled, please try again later.")
+                    MsgBox("An Error Occurred when copying Folder: " + CollectionView.Path.ToString + "\" + l_text + "to: " + "C:\Tfff1\Simple_MC\Mod_Collection_Export\" + l_text + ". Export has been Cancelled, please try again later.")
                     Close()
                 End Try
             Next
@@ -125,13 +125,14 @@ Public Class ExportToModpack
         End If
 Stage2: 'Cleans up the Directory after the Collection has been exported:
             Try
-                My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", FileIO.DeleteDirectoryOption.DeleteAllContents)
-            Catch ex As Exception
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        Catch ex As Exception
             MsgBox("WARNING: Cleanup Failed - This may cause problems later")
         End Try
 finish:
         Enabled = True
-        MsgBox("Done!")
+        MsgBox("Export Successful!")
+        Close()
     End Sub
 
     Private Sub SaveFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
@@ -142,7 +143,7 @@ Check:
             GoTo Check
         End If
 
-        ZipFile.CreateFromDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export", outpath)
+        ZipFile.CreateFromDirectory("C:\Tfff1\Simple_MC\Mod_Collection_Export", outpath)
         Call ExportCollection(2)
 
     End Sub

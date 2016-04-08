@@ -214,4 +214,21 @@ DeleteSuccess:
     Private Sub SubDirectoriesList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SubDirectoriesList.SelectedIndexChanged
 
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+        Call Collection_FolderView_LoadManager()
+
+        For l_index As Integer = 0 To ModList.Items.Count - 1
+            Dim l_text As String = CStr(ModList.Items(l_index))
+            If Not l_text.ToString.ToLower.Contains(SearchText.Text.ToLower) Then
+                InvisibleListBox.Items.Add(l_text)
+            End If
+        Next
+
+        For l_index2 As Integer = 0 To InvisibleListBox.Items.Count - 1
+            Dim l_text2 As String = CStr(InvisibleListBox.Items(l_index2))
+            ModList.Items.Remove(l_text2)
+        Next
+        InvisibleListBox.Items.Clear()
+    End Sub
 End Class

@@ -242,12 +242,11 @@ Partial Class CollectionView
         '
         'Button6
         '
-        Me.Button6.Enabled = False
         Me.Button6.Location = New System.Drawing.Point(12, 42)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(156, 49)
         Me.Button6.TabIndex = 28
-        Me.Button6.Text = "Export as Technic Modpack" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Coming Soon)"
+        Me.Button6.Text = "Export as Technic Modpack"
         Me.Button6.UseVisualStyleBackColor = True
         '
         'Button7
