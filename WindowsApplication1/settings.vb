@@ -72,4 +72,23 @@ Load:
         CompareCollectionTitles.Checked = My.Settings.compareTitles
         SortBoxes.Checked = My.Settings.sortLists
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim result As Integer = MessageBox.Show("Are you sure you would like to delete these Collections? The process is irreversible", "Are you sure?", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Cancel Then
+            'messageBox.Show("Cancel pressed")
+        ElseIf result = DialogResult.No Then
+            'MessageBox.Show("No pressed")
+        ElseIf result = DialogResult.Yes Then
+            Dim Path = "C:\Tfff1\Simple_MC\Mod_Collections"
+            MessageBox.Show("The Mod Installer may restart.")
+            Try
+                My.Computer.FileSystem.DeleteDirectory(Path, FileIO.DeleteDirectoryOption.DeleteAllContents)
+            Catch ex As Exception
+                MsgBox("An Error Ocurred when deleting Collection. Maybe Something is wrong?")
+            End Try
+
+            Application.Restart()
+        End If
+    End Sub
 End Class

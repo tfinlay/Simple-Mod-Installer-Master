@@ -39,6 +39,13 @@ Partial Class settings
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.showunreachables = New System.Windows.Forms.CheckBox()
         Me.SortBoxes = New System.Windows.Forms.CheckBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -132,7 +139,7 @@ Partial Class settings
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(15, 67)
+        Me.CheckBox1.Location = New System.Drawing.Point(6, 6)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(180, 17)
         Me.CheckBox1.TabIndex = 16
@@ -144,7 +151,7 @@ Partial Class settings
         Me.CompareCollectionTitles.AutoSize = True
         Me.CompareCollectionTitles.Checked = True
         Me.CompareCollectionTitles.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CompareCollectionTitles.Location = New System.Drawing.Point(15, 90)
+        Me.CompareCollectionTitles.Location = New System.Drawing.Point(3, 0)
         Me.CompareCollectionTitles.Name = "CompareCollectionTitles"
         Me.CompareCollectionTitles.Size = New System.Drawing.Size(105, 17)
         Me.CompareCollectionTitles.TabIndex = 17
@@ -155,7 +162,7 @@ Partial Class settings
         'showunreachables
         '
         Me.showunreachables.AutoSize = True
-        Me.showunreachables.Location = New System.Drawing.Point(15, 114)
+        Me.showunreachables.Location = New System.Drawing.Point(2, 46)
         Me.showunreachables.Name = "showunreachables"
         Me.showunreachables.Size = New System.Drawing.Size(194, 17)
         Me.showunreachables.TabIndex = 18
@@ -169,13 +176,58 @@ Partial Class settings
         Me.SortBoxes.AutoSize = True
         Me.SortBoxes.Checked = True
         Me.SortBoxes.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.SortBoxes.Location = New System.Drawing.Point(15, 138)
+        Me.SortBoxes.Location = New System.Drawing.Point(2, 23)
         Me.SortBoxes.Name = "SortBoxes"
         Me.SortBoxes.Size = New System.Drawing.Size(69, 17)
         Me.SortBoxes.TabIndex = 19
         Me.SortBoxes.Text = "Sort Lists"
         Me.ToolTip1.SetToolTip(Me.SortBoxes, "Whether or not to sort items in some lists by name" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " - Not very noticable")
         Me.SortBoxes.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(6, 109)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(327, 23)
+        Me.Button2.TabIndex = 20
+        Me.Button2.Text = "DELETE ALL COLLECTIONS"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 54)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(347, 164)
+        Me.TabControl1.TabIndex = 21
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.CheckBox1)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(339, 138)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "General"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.showunreachables)
+        Me.TabPage2.Controls.Add(Me.Button2)
+        Me.TabPage2.Controls.Add(Me.CompareCollectionTitles)
+        Me.TabPage2.Controls.Add(Me.SortBoxes)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(339, 138)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Collections"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'settings
         '
@@ -184,10 +236,7 @@ Partial Class settings
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(371, 313)
-        Me.Controls.Add(Me.SortBoxes)
-        Me.Controls.Add(Me.showunreachables)
-        Me.Controls.Add(Me.CompareCollectionTitles)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TextBox1)
@@ -202,6 +251,11 @@ Partial Class settings
         Me.MinimizeBox = False
         Me.Name = "settings"
         Me.Text = "Options"
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -222,4 +276,8 @@ Partial Class settings
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents showunreachables As CheckBox
     Friend WithEvents SortBoxes As CheckBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
 End Class

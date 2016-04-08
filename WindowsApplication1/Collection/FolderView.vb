@@ -124,6 +124,8 @@ DeleteSuccess:
                     MsgBox("Failed to open editor for file: " + Path + "\" + SubDirectoriesList.SelectedItem + "\" + l_text)
                 End Try
             Next
+        Else
+            MsgBox("You have Show Potentially Unreachable Files activated. Editing is not supported when this is on. You must disable it in Options to use this feature.")
         End If
     End Sub
 
@@ -169,6 +171,18 @@ DeleteSuccess:
             CollectionView.Enabled = False
         End If
 
+        If ModList.Items.Count = 0 And SubDirectoriesList.SelectedItems.Count = 0 Then
+            SelectSubDirLabel.Visible = True
+        Else
+            SelectSubDirLabel.Visible = False
+        End If
+
+        If ModList.Items.Count = 0 And Not SelectSubDirLabel.Visible = True Then
+            NothingHereLabel.Visible = True
+        Else
+            NothingHereLabel.Visible = False
+        End If
+
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles openFolder.Click
@@ -187,5 +201,17 @@ DeleteSuccess:
     Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
         Enabled = False
         ImportFolder.Show()
+    End Sub
+
+    Private Sub ModList_MouseHover(sender As Object, e As EventArgs) Handles ModList.MouseHover
+        ModList.Focus()
+    End Sub
+
+    Private Sub SubDirectoriesList_MouseHover(sender As Object, e As EventArgs) Handles SubDirectoriesList.MouseHover
+        SubDirectoriesList.Focus()
+    End Sub
+
+    Private Sub SubDirectoriesList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SubDirectoriesList.SelectedIndexChanged
+
     End Sub
 End Class

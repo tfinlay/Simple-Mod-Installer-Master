@@ -38,6 +38,8 @@ Partial Class FolderView
         Me.openFolder = New System.Windows.Forms.Button()
         Me.ModList = New System.Windows.Forms.CheckedListBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.NothingHereLabel = New System.Windows.Forms.Label()
+        Me.SelectSubDirLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'SubDirectoriesList
@@ -152,7 +154,7 @@ Partial Class FolderView
         '
         Me.openFolder.Location = New System.Drawing.Point(103, 37)
         Me.openFolder.Name = "openFolder"
-        Me.openFolder.Size = New System.Drawing.Size(75, 23)
+        Me.openFolder.Size = New System.Drawing.Size(85, 23)
         Me.openFolder.TabIndex = 13
         Me.openFolder.Text = "Open Folder"
         Me.openFolder.UseVisualStyleBackColor = True
@@ -179,6 +181,30 @@ Partial Class FolderView
         Me.Button1.Text = "Import Folder"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'NothingHereLabel
+        '
+        Me.NothingHereLabel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.NothingHereLabel.AutoSize = True
+        Me.NothingHereLabel.Location = New System.Drawing.Point(387, 114)
+        Me.NothingHereLabel.Name = "NothingHereLabel"
+        Me.NothingHereLabel.Size = New System.Drawing.Size(308, 39)
+        Me.NothingHereLabel.TabIndex = 16
+        Me.NothingHereLabel.Text = "Just because nothing is showing here does not mean this folder" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "doesn't contain a" &
+    "nything, it could contain subfolders which don't" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "show up here"
+        Me.NothingHereLabel.Visible = False
+        '
+        'SelectSubDirLabel
+        '
+        Me.SelectSubDirLabel.AutoSize = True
+        Me.SelectSubDirLabel.Location = New System.Drawing.Point(361, 114)
+        Me.SelectSubDirLabel.Name = "SelectSubDirLabel"
+        Me.SelectSubDirLabel.Size = New System.Drawing.Size(357, 13)
+        Me.SelectSubDirLabel.TabIndex = 17
+        Me.SelectSubDirLabel.Text = "Please Select a Folder in the list to the left for it's contents to show up here"
+        Me.SelectSubDirLabel.Visible = False
+        '
         'FolderView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -186,6 +212,8 @@ Partial Class FolderView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(730, 439)
+        Me.Controls.Add(Me.SelectSubDirLabel)
+        Me.Controls.Add(Me.NothingHereLabel)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ModList)
         Me.Controls.Add(Me.openFolder)
@@ -222,4 +250,6 @@ Partial Class FolderView
     Friend WithEvents openFolder As Button
     Public WithEvents ModList As CheckedListBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents NothingHereLabel As Label
+    Friend WithEvents SelectSubDirLabel As Label
 End Class

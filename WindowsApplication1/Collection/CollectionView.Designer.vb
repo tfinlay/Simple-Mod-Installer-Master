@@ -46,6 +46,7 @@ Partial Class CollectionView
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -249,6 +250,16 @@ Partial Class CollectionView
         Me.Button6.Text = "Export as Technic Modpack" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Coming Soon)"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'Button7
+        '
+        Me.Button7.ForeColor = System.Drawing.Color.Red
+        Me.Button7.Location = New System.Drawing.Point(17, 473)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(198, 23)
+        Me.Button7.TabIndex = 29
+        Me.Button7.Text = "DELETE COLLECTION"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'CollectionView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -256,6 +267,7 @@ Partial Class CollectionView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1062, 596)
+        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button2)
@@ -307,4 +319,5 @@ Partial Class CollectionView
     Public WithEvents Button2 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
 End Class

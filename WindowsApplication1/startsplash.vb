@@ -24,6 +24,7 @@ Public NotInheritable Class startsplash
         If File.Exists("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt") Then
             File.Delete("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
         End If
+
         If Not Directory.Exists("C:\Tfff1\Simple_MC\Mod_Collections_Export") Then
             My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
         Else

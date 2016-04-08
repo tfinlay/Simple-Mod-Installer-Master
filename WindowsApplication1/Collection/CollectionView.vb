@@ -9,8 +9,8 @@ Public Class CollectionView
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Hide()
-        Form2.Show()
+        'Hide()
+        'Form2.Show()
         Close()
     End Sub
 
@@ -244,5 +244,30 @@ Public Class CollectionView
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Enabled = False
         ExportToModpack.Show()
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim result As Integer = MessageBox.Show("Are you sure you would like to delete this collection? The process is irreversible", "Are you sure?", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Cancel Then
+            'messageBox.Show("Cancel pressed")
+        ElseIf result = DialogResult.No Then
+            'MessageBox.Show("No pressed")
+        ElseIf result = DialogResult.Yes Then
+            MessageBox.Show("The Mod Installer may restart.")
+            Try
+                My.Computer.FileSystem.DeleteDirectory(Path, FileIO.DeleteDirectoryOption.DeleteAllContents)
+            Catch ex As Exception
+                MsgBox("An Error Ocurred when deleting Collection. Maybe Something is wrong?")
+            End Try
+
+            Try
+                My.Computer.FileSystem.DeleteFile("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
+            Catch ex As Exception
+                MsgBox("Failed to delete File: collections.txt, please navigate to C:\Tfff1\Simple_MC\Mod_Collections and delete collections.txt to resolve this error")
+            End Try
+
+            Application.Restart()
+
+        End If
     End Sub
 End Class
