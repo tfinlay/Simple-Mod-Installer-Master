@@ -49,6 +49,9 @@ Public Class CollectionView
         Text = "Edit Collection - " + Title.Text
         Button4.Text = "View Disabled Mods"
         Button2.Text = "Disable Selected"
+
+        ModList.Sorted = My.Settings.sortLists
+
         Enabled = True
     End Sub
 

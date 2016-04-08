@@ -37,6 +37,8 @@ Partial Class settings
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.CompareCollectionTitles = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.showunreachables = New System.Windows.Forms.CheckBox()
+        Me.SortBoxes = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -150,6 +152,31 @@ Partial Class settings
         Me.ToolTip1.SetToolTip(Me.CompareCollectionTitles, resources.GetString("CompareCollectionTitles.ToolTip"))
         Me.CompareCollectionTitles.UseVisualStyleBackColor = True
         '
+        'showunreachables
+        '
+        Me.showunreachables.AutoSize = True
+        Me.showunreachables.Location = New System.Drawing.Point(15, 114)
+        Me.showunreachables.Name = "showunreachables"
+        Me.showunreachables.Size = New System.Drawing.Size(194, 17)
+        Me.showunreachables.TabIndex = 18
+        Me.showunreachables.Text = "Show Potentially unreachable Items"
+        Me.ToolTip1.SetToolTip(Me.showunreachables, "Can be very unstable - useful for viewing files in subdirectories - VERY ERROR PR" &
+        "ONE" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "DEFAULT: Disabled")
+        Me.showunreachables.UseVisualStyleBackColor = True
+        '
+        'SortBoxes
+        '
+        Me.SortBoxes.AutoSize = True
+        Me.SortBoxes.Checked = True
+        Me.SortBoxes.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.SortBoxes.Location = New System.Drawing.Point(15, 138)
+        Me.SortBoxes.Name = "SortBoxes"
+        Me.SortBoxes.Size = New System.Drawing.Size(69, 17)
+        Me.SortBoxes.TabIndex = 19
+        Me.SortBoxes.Text = "Sort Lists"
+        Me.ToolTip1.SetToolTip(Me.SortBoxes, "Whether or not to sort items in some lists by name" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " - Not very noticable")
+        Me.SortBoxes.UseVisualStyleBackColor = True
+        '
         'settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -157,6 +184,8 @@ Partial Class settings
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(371, 313)
+        Me.Controls.Add(Me.SortBoxes)
+        Me.Controls.Add(Me.showunreachables)
         Me.Controls.Add(Me.CompareCollectionTitles)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Label5)
@@ -191,4 +220,6 @@ Partial Class settings
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents CompareCollectionTitles As CheckBox
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents showunreachables As CheckBox
+    Friend WithEvents SortBoxes As CheckBox
 End Class

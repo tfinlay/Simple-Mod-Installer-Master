@@ -230,6 +230,30 @@ Namespace My
                 Return CType(Me("TestEnvironment"),Boolean)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property showUnreachables() As Boolean
+            Get
+                Return CType(Me("showUnreachables"),Boolean)
+            End Get
+            Set
+                Me("showUnreachables") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property sortLists() As Boolean
+            Get
+                Return CType(Me("sortLists"),Boolean)
+            End Get
+            Set
+                Me("sortLists") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

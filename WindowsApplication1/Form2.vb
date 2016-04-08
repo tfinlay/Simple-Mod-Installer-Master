@@ -6,6 +6,7 @@ Public Class Form2
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Enabled = False
+        ListBox1.Sorted = My.Settings.sortLists
         Using sr As StreamReader = New StreamReader("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt")
             Dim currentline As String
             Dim totallength = File.ReadAllLines("C:\Tfff1\Simple_MC\Mod_Collections\collections.txt").Length

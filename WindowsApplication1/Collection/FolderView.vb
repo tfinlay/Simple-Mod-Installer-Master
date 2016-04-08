@@ -17,6 +17,8 @@
         Catch ex As Exception
         End Try
 
+        ModList.Sorted = My.Settings.sortLists
+        SubDirectoriesList.Sorted = My.Settings.sortLists
         Enabled = True
     End Sub
 
@@ -46,9 +48,13 @@
     Public Sub SubDirectoriesList_SelectedIndexChanged() Handles SubDirectoriesList.SelectedIndexChanged
         Try
             If My.Computer.FileSystem.DirectoryExists(Path + "\" + SubDirectoriesList.SelectedItem.ToString) Then
-                Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
+                If My.Settings.showUnreachables = False Then
+                    Call FolderView_LoadFiles(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString)
+                Else
+                    Call Collection_LoadMods(Me, Path + "\" + SubDirectoriesList.SelectedItem.ToString, False)
+                End If
             Else
-                Call Collection_FolderView_LoadManager()
+                    Call Collection_FolderView_LoadManager()
             End If
         Catch
         End Try
@@ -70,22 +76,54 @@
     End Sub
 
     Private Sub DelFile_Click(sender As Object, e As EventArgs) Handles DelFile.Click
-
-        For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
-            Dim l_text As String = CStr(ModList.CheckedItems(l_index))
-            My.Computer.FileSystem.DeleteFile(Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text)
-        Next
-
-        Call Collection_FolderView_LoadManager()
-
+        If My.Settings.showUnreachables = True Then
+            'UNSTABLE - Use with caution:
+            For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+                Try
+                    My.Computer.FileSystem.DeleteFile(Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text)
+                Catch ex As Exception
+                    For Each Dir As String In IO.Directory.GetDirectories(Path + "\" + SubDirectoriesList.SelectedItem.ToString)
+                        Try
+                            testmsg("Attempting to Delete: " + Dir.ToString + "\" + l_text)
+                            My.Computer.FileSystem.DeleteFile(Dir.ToString + "\" + l_text)
+                            GoTo DeleteSuccess
+                        Catch
+                            testmsg("Couldn't find the file: " + Dir.ToString + "\" + l_text)
+                        End Try
+                    Next
+                    MsgBox("Failed to find the File: " + l_text + " - Maybe it's in a sub-subfolder that we can't see?")
+                    'ERROR NOW HANDLED: MsgBox("Couldn't find file: " + Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text)
+DeleteSuccess:
+                End Try
+            Next
+            Call Collection_FolderView_LoadManager()
+        Else
+            'Only Files Directly inside the Directory are Shown - Very Easy
+            For l_index2 As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text2 As String = CStr(ModList.CheckedItems(l_index2))
+                Try
+                    My.Computer.FileSystem.DeleteFile(Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text2)
+                Catch ex As Exception
+                    MsgBox("Failed to delete file: " + Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\" + l_text2)
+                End Try
+            Next
+            Call Collection_FolderView_LoadManager()
+        End If
     End Sub
 
     Private Sub EditFile_Click(sender As Object, e As EventArgs) Handles EditFile.Click
-        If Not ModList.SelectedItem.ToString = "" Then
-            Dim SelectedFile As String = Path + "\" + SubDirectoriesList.SelectedItem + "\" + ModList.SelectedItem.ToString
-            Process.Start(SelectedFile)
-        Else
-            MsgBox("Please select an item to edit it.")
+
+        If My.Settings.showUnreachables = False Then
+            For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+                Try
+                    Dim SelectedFile As String = Path + "\" + SubDirectoriesList.SelectedItem + "\" + l_text
+                    Process.Start(SelectedFile)
+                Catch ex As Exception
+                    MsgBox("Failed to open editor for file: " + Path + "\" + SubDirectoriesList.SelectedItem + "\" + l_text)
+                End Try
+            Next
         End If
     End Sub
 

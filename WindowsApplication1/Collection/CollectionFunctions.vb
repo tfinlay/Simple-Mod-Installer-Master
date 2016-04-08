@@ -44,6 +44,32 @@ Module CollectionFunctions
     End Sub
 
 
+    Public Sub FolderView_LoadFiles(sender As Object, path As String)
+        'sender.Title.text = My.Settings.SelectedCollection
+        sender.ModList.ClearSelected()
+        sender.ModList.Items.Clear()
+        'Getting 
+        Dim Folder As New IO.DirectoryInfo(path)
+        Try
+            For Each File As IO.FileInfo In Folder.GetFiles("*.*", IO.SearchOption.TopDirectoryOnly)
+                If Not File.Name.ToString.Contains(".CollectionInfo") Then
+                    sender.ModList.Items.Add(File.Name)
+                    Application.DoEvents()
+                End If
+            Next
+        Catch
+            MsgBox("An error occured when looking for mods. Maybe the mods folder has been deleted? We're going to try and create a new one now...")
+            Try
+                My.Computer.FileSystem.CreateDirectory(path)
+            Catch
+                MsgBox("The attempt to create the folder has failed too. try creating a new collection.")
+                CollectionView.Close()
+                Form3.Show()
+            End Try
+        End Try
+        Return
+    End Sub
+
     'For Reading The Title and MCversion from A Collection's .collectionInfo which is located in the \mods folder
     Public Sub Collection_ReadInfo(sender As Object, path As String)
         If File.Exists(path + "\mods\" + My.Settings.SelectedCollection + ".CollectionInfo") Then
