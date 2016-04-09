@@ -34,13 +34,14 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BrowseButton1
         '
         Me.BrowseButton1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.BrowseButton1.Location = New System.Drawing.Point(474, 96)
+        Me.BrowseButton1.Location = New System.Drawing.Point(495, 96)
         Me.BrowseButton1.Name = "BrowseButton1"
         Me.BrowseButton1.Size = New System.Drawing.Size(75, 23)
         Me.BrowseButton1.TabIndex = 0
@@ -54,7 +55,7 @@ Partial Class Form1
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(82, 96)
+        Me.TextBox1.Location = New System.Drawing.Point(103, 96)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(386, 20)
         Me.TextBox1.TabIndex = 1
@@ -64,7 +65,7 @@ Partial Class Form1
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(176, 80)
+        Me.Label1.Location = New System.Drawing.Point(197, 80)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(273, 13)
         Me.Label1.TabIndex = 2
@@ -107,7 +108,7 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Button2.Location = New System.Drawing.Point(240, 359)
+        Me.Button2.Location = New System.Drawing.Point(310, 362)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 9
@@ -120,12 +121,23 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(548, 362)
+        Me.Button3.Location = New System.Drawing.Point(629, 362)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(32, 23)
         Me.Button3.TabIndex = 11
         Me.Button3.Text = "Exit"
         Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Red
+        Me.Label4.Location = New System.Drawing.Point(22, 119)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(621, 18)
+        Me.Label4.TabIndex = 12
+        Me.Label4.Text = "THIS IS NO LONGER SUPPORTED AND WILL BE REMOVED IN AN UPCOMING UPDATE"
         '
         'Form1
         '
@@ -135,7 +147,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(592, 394)
+        Me.ClientSize = New System.Drawing.Size(673, 394)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.LinkLabel1)
@@ -167,4 +180,5 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents ErrorProvider1 As ErrorProvider
     Friend WithEvents Button3 As Button
+    Friend WithEvents Label4 As Label
 End Class

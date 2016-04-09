@@ -167,6 +167,13 @@ DeleteSuccess:
             delfolder.Enabled = True
             openFolder.Enabled = True
         End If
+
+        If SubDirectoriesList.Items.Count < 1 Then
+            EmptySubs.Visible = True
+        Else
+            EmptySubs.Visible = False
+        End If
+
         If Not CollectionView.Enabled = False Then
             CollectionView.Enabled = False
         End If

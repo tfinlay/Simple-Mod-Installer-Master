@@ -242,14 +242,15 @@ Scan:
 
             For Each File As IO.FileInfo In Folder.GetFiles("*.CollectionInfo", IO.SearchOption.AllDirectories)
                 If File.Name.ToString.Contains(".CollectionInfo") Then
-                    MsgBox(File.Name.ToString)
+                    testmsg(File.Name.ToString)
+                    sender.successList.items.add("Found CollectionInfo File of activated Collection: " + File.Name.ToString)
                     CurrentlyEnabledFile = File.Name.ToString
                     Application.DoEvents()
                     GoTo CheckDone
                 End If
             Next
 CheckDone:
-            MsgBox("Skipped to CheckDone")
+            testmsg("Skipped to CheckDone")
             'Now get the Collection's Name out of the CollectionInfo File
             Try
                 Dim currentLine As String
@@ -286,8 +287,10 @@ Scan:
             'Now Deactivate The Collection
             If CurrentlyEnabledCollectionName = My.Settings.SelectedCollection Then
                 MsgBox("New Changes will be synced - Please Note: Changes to all folders except Saves and config in the .minecraft version of this Collection will be lost")
+                sender.successList.items.add("Starting Sync")
             Else
-                MsgBox("The Collection: " + My.Settings.CurrentlyActivated.ToString + " will be deactivated")
+                testmsg("The Collection: " + My.Settings.CurrentlyActivated.ToString + " will be deactivated")
+                sender.successList.items.add("Deactivating Collection: " + My.Settings.CurrentlyActivated.ToString)
             End If
             '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             'Deactivate Current Collection

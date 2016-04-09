@@ -137,6 +137,6 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        MsgBox("This has been replaced by Collections, and will be removed in an upcoming update.")
     End Sub
 End Class

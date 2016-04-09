@@ -25,7 +25,7 @@ Partial Class settings
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(settings))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.VersionText = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -42,10 +42,14 @@ Partial Class settings
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TestEnvironment = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -57,14 +61,14 @@ Partial Class settings
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Version:"
         '
-        'Label2
+        'VersionText
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(63, 291)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(22, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "1.6"
+        Me.VersionText.AutoSize = True
+        Me.VersionText.Location = New System.Drawing.Point(63, 291)
+        Me.VersionText.Name = "VersionText"
+        Me.VersionText.Size = New System.Drawing.Size(22, 13)
+        Me.VersionText.TabIndex = 1
+        Me.VersionText.Text = "1.6"
         '
         'Button1
         '
@@ -198,7 +202,9 @@ Partial Class settings
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(12, 54)
+        Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(347, 164)
@@ -206,6 +212,7 @@ Partial Class settings
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button4)
         Me.TabPage1.Controls.Add(Me.CheckBox1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
@@ -214,6 +221,15 @@ Partial Class settings
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "General"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(192, 2)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(147, 23)
+        Me.Button4.TabIndex = 17
+        Me.Button4.Text = "Check Now"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -228,6 +244,27 @@ Partial Class settings
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Collections"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.TestEnvironment)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(339, 138)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Advanced"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TestEnvironment
+        '
+        Me.TestEnvironment.AutoSize = True
+        Me.TestEnvironment.Location = New System.Drawing.Point(4, 7)
+        Me.TestEnvironment.Name = "TestEnvironment"
+        Me.TestEnvironment.Size = New System.Drawing.Size(109, 17)
+        Me.TestEnvironment.TabIndex = 0
+        Me.TestEnvironment.Text = "Test Environment"
+        Me.TestEnvironment.UseVisualStyleBackColor = True
         '
         'settings
         '
@@ -244,8 +281,9 @@ Partial Class settings
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.VersionText)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -256,13 +294,15 @@ Partial Class settings
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents VersionText As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents Label3 As Label
@@ -280,4 +320,7 @@ Partial Class settings
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
+    Public WithEvents Button4 As Button
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TestEnvironment As CheckBox
 End Class

@@ -222,13 +222,16 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public ReadOnly Property TestEnvironment() As Boolean
+        Public Property TestEnvironment() As Boolean
             Get
                 Return CType(Me("TestEnvironment"),Boolean)
             End Get
+            Set
+                Me("TestEnvironment") = value
+            End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _

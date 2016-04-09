@@ -43,6 +43,7 @@ Partial Class FolderView
         Me.SearchButton = New System.Windows.Forms.Button()
         Me.SearchText = New System.Windows.Forms.TextBox()
         Me.InvisibleListBox = New System.Windows.Forms.ListBox()
+        Me.EmptySubs = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'SubDirectoriesList
@@ -190,6 +191,7 @@ Partial Class FolderView
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NothingHereLabel.AutoSize = True
+        Me.NothingHereLabel.BackColor = System.Drawing.SystemColors.Window
         Me.NothingHereLabel.Location = New System.Drawing.Point(387, 114)
         Me.NothingHereLabel.Name = "NothingHereLabel"
         Me.NothingHereLabel.Size = New System.Drawing.Size(308, 39)
@@ -201,6 +203,7 @@ Partial Class FolderView
         'SelectSubDirLabel
         '
         Me.SelectSubDirLabel.AutoSize = True
+        Me.SelectSubDirLabel.BackColor = System.Drawing.SystemColors.Window
         Me.SelectSubDirLabel.Location = New System.Drawing.Point(361, 114)
         Me.SelectSubDirLabel.Name = "SelectSubDirLabel"
         Me.SelectSubDirLabel.Size = New System.Drawing.Size(357, 13)
@@ -235,6 +238,18 @@ Partial Class FolderView
         Me.InvisibleListBox.TabIndex = 20
         Me.InvisibleListBox.Visible = False
         '
+        'EmptySubs
+        '
+        Me.EmptySubs.AutoSize = True
+        Me.EmptySubs.BackColor = System.Drawing.SystemColors.Window
+        Me.EmptySubs.Location = New System.Drawing.Point(27, 147)
+        Me.EmptySubs.Name = "EmptySubs"
+        Me.EmptySubs.Size = New System.Drawing.Size(210, 26)
+        Me.EmptySubs.TabIndex = 21
+        Me.EmptySubs.Text = "                 Nothing to show here." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Try restarting the Installer or adding a " &
+    "folder"
+        Me.EmptySubs.Visible = False
+        '
         'FolderView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -242,6 +257,7 @@ Partial Class FolderView
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(730, 439)
+        Me.Controls.Add(Me.EmptySubs)
         Me.Controls.Add(Me.InvisibleListBox)
         Me.Controls.Add(Me.SearchText)
         Me.Controls.Add(Me.SearchButton)
@@ -288,4 +304,5 @@ Partial Class FolderView
     Friend WithEvents SearchButton As Button
     Friend WithEvents SearchText As TextBox
     Friend WithEvents InvisibleListBox As ListBox
+    Friend WithEvents EmptySubs As Label
 End Class

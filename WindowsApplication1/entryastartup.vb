@@ -2,7 +2,7 @@
 Public Class EntryMenu
     Public appdata
 
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub EntryMenu_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         testmsg("Test Environment is set to true!")
         appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         Dim minecraftfolder As String
@@ -21,7 +21,7 @@ Public Class EntryMenu
         myfile.Close()
 
         If My.Settings.checkForUpdates = True Then
-            Call UpdateCheck()
+            Call UpdateCheck(Me)
         End If
 
     End Sub
@@ -76,7 +76,7 @@ Public Class EntryMenu
         helphome.Show()
     End Sub
 
-    Function UpdateCheck()
+    Public Function UpdateCheck(sender As Object)
         My.Settings.lastupdatecheck = Date.Now
         Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://minecraft-mod-installer.weebly.com/uploads/2/0/2/4/20242643/simpleversion.txt")
         Dim response As System.Net.HttpWebResponse = request.GetResponse()
@@ -85,12 +85,15 @@ Public Class EntryMenu
         Dim currentversion As String = My.Application.Info.Version.ToString
         If newestversion.Contains(currentversion) Then
             My.Settings.updateurl = ""
+            If sender Is settings Then
+                sender.button4.text = "No Updates Found"
+            End If
         Else
             Dim result As Integer = MessageBox.Show("There is an update available for the Simple Mod Installer. Would you like to install it?", "Update Available!", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
 
             ElseIf result = DialogResult.Yes Then
-                Dim TheBrowser As Object = CreateObject("InternetExplorer.Application")
+                    Dim TheBrowser As Object = CreateObject("InternetExplorer.Application")
                 TheBrowser.Visible = True
                 TheBrowser.Navigate(sr.ReadLine)
                 MsgBox("Close the Simple Mod Installer and run the newly Downloaded Version.")
@@ -100,5 +103,17 @@ Public Class EntryMenu
 
     Private Sub EntryMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+        Call PictureBox4_Click(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+        Call PictureBox5_Click(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+        Call PictureBox3_Click(Me, EventArgs.Empty)
     End Sub
 End Class

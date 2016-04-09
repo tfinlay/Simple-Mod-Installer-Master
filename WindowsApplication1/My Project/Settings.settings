@@ -44,7 +44,7 @@
     <Setting Name="CurrentlyActivated" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="TestEnvironment" Type="System.Boolean" Scope="Application">
+    <Setting Name="TestEnvironment" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="showUnreachables" Type="System.Boolean" Scope="User">

@@ -15,7 +15,11 @@ Public Class World_InstallerFormZip
 
 
     Private Sub World_InstallerFormZip_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        tosaves = "\.minecraft\saves"
+        Dim savesfolder = appdata + tosaves
+        If Not My.Computer.FileSystem.DirectoryExists(savesfolder) Then
+            My.Computer.FileSystem.CreateDirectory(savesfolder)
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -39,22 +43,24 @@ Public Class World_InstallerFormZip
     Private Sub BrowseButton1_Click(sender As Object, e As EventArgs) Handles BrowseButton1.Click
         'Dim foldername As String
         OpenFileDialog1.Title = "Please Select a World Zip File"
-
-        OpenFileDialog1.InitialDirectory = "c:\"
+        OpenFileDialog1.Filter = "Zip Files (*.zip)|*.zip|All Files (*.*)|*.*"
+        'OpenFileDialog1.InitialDirectory = "c:\"
 
         OpenFileDialog1.ShowDialog()
     End Sub
 
     'What happens when the Install button is click (where the magic happens):
     Private Sub Install_Click(sender As Object, e As EventArgs) Handles Install.Click
+        If Not TextBox1.Text = "" Then
+            tosaves = "\.minecraft\saves\"
 
-        tosaves = "\.minecraft\saves\"
-
-        My.Settings.outdirec = appdata + tosaves
-        My.Settings.zipdirec = TextBox1.Text
-        My.Settings.Save()
-        Call unzip()
-
+            My.Settings.outdirec = appdata + tosaves
+            My.Settings.zipdirec = TextBox1.Text
+            My.Settings.Save()
+            Call unzip()
+        Else
+            MsgBox("Please Select a File to import.")
+        End If
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
@@ -80,8 +86,8 @@ Public Class World_InstallerFormZip
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        tosaves = "\.minecraft\saves\"
+        tosaves = "\.minecraft\saves"
         Dim savesfolder = appdata + tosaves
-        Process.Start(savesfolder)
+        Process.Start("explorer.exe", savesfolder)
     End Sub
 End Class
