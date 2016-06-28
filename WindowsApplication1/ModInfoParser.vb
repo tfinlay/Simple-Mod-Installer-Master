@@ -3,6 +3,10 @@ Imports System.IO
 
 Module ModInfoParser
     Public Function parseModInfo(locationOfInfo As String)
+        Dim Modid
+        Dim Name
+        Dim Desc
+        Dim Version
 
         Using reader As New JsonTextReader(New StringReader(File.ReadAllText(locationOfInfo)))
             Dim line = File.ReadAllLines(locationOfInfo).Count
@@ -11,12 +15,14 @@ Module ModInfoParser
 
                 reader.Read()
 
-                If line > 16 Then
-
-                ElseIf checkEven(line) = True Then
-                    testmsg(previousValue + " : " + reader.Value)
-                Else
-
+                If previousValue = "modid" Then
+                    Modid = reader.Value.ToString
+                ElseIf previousValue = "name" Then
+                    Name = reader.Value.ToString
+                ElseIf previousValue = "description" Then
+                    Desc = reader.Value.ToString
+                ElseIf previousValue = "version" Then
+                    Version = reader.Value.ToString
                 End If
                 line = line - 1
                 previousValue = reader.Value
@@ -24,10 +30,9 @@ Module ModInfoParser
 
         End Using
 
-        'Dim jsonData As String = File.ReadAllText(locationOfInfo)
-        'Dim Data = JsonConvert.DeserializeObject(jsonData)
-        'Dim ArrayReturn = Data.Parse().selectToken("name")
-        'testmsg(ArrayReturn)
+        Dim toReturnArray = {Modid, Name, Desc, Version}
+
+        testmsg(toReturnArray.ToString())
     End Function
 
     Function checkEven(a)
