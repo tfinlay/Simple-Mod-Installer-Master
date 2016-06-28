@@ -270,4 +270,12 @@ Public Class CollectionView
 
         End If
     End Sub
+
+    Private Sub DisplayModInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayModInfoToolStripMenuItem.Click
+        If Not ModList.SelectedItems.Count > 1 Then
+
+        Else
+            MsgBox("ERROR: You can only select one Mod at a time for Information Viewing.")
+        End If
+    End Sub
 End Class

@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports Newtonsoft.Json.Linq
+
 Public Class EntryMenu
     Public appdata
 
@@ -69,7 +71,7 @@ Public Class EntryMenu
     End Sub
 
     Private Sub PictureBox6_Click(sender As Object, e As EventArgs) Handles PictureBox6.Click
-        Settings.show()
+        settings.Show()
     End Sub
 
     Private Sub PictureBox7_Click(sender As Object, e As EventArgs)
@@ -93,7 +95,7 @@ Public Class EntryMenu
             If result = DialogResult.No Then
 
             ElseIf result = DialogResult.Yes Then
-                    Dim TheBrowser As Object = CreateObject("InternetExplorer.Application")
+                Dim TheBrowser As Object = CreateObject("InternetExplorer.Application")
                 TheBrowser.Visible = True
                 TheBrowser.Navigate(sr.ReadLine)
                 MsgBox("Close the Simple Mod Installer and run the newly Downloaded Version.")
