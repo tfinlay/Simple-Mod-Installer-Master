@@ -28,6 +28,14 @@ Partial Class ModInfo
         Me.modLogo = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.modDesc = New System.Windows.Forms.TextBox()
+        Me.modVersion = New System.Windows.Forms.Label()
+        Me.modMCVersion = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.modCredits = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.modAuthors = New System.Windows.Forms.Label()
+        Me.modURL = New System.Windows.Forms.LinkLabel()
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -44,7 +52,7 @@ Partial Class ModInfo
         'modID
         '
         Me.modID.AutoSize = True
-        Me.modID.Location = New System.Drawing.Point(204, 38)
+        Me.modID.Location = New System.Drawing.Point(204, 60)
         Me.modID.Name = "modID"
         Me.modID.Size = New System.Drawing.Size(42, 13)
         Me.modID.TabIndex = 1
@@ -53,7 +61,7 @@ Partial Class ModInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(174, 38)
+        Me.Label1.Location = New System.Drawing.Point(174, 60)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(24, 13)
         Me.Label1.TabIndex = 2
@@ -71,7 +79,7 @@ Partial Class ModInfo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(174, 63)
+        Me.Label2.Location = New System.Drawing.Point(174, 85)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 13)
         Me.Label2.TabIndex = 4
@@ -80,17 +88,101 @@ Partial Class ModInfo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(174, 80)
+        Me.Label3.Location = New System.Drawing.Point(174, 102)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 13)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Minecraft Version:"
         '
+        'modDesc
+        '
+        Me.modDesc.BackColor = System.Drawing.Color.White
+        Me.modDesc.Cursor = System.Windows.Forms.Cursors.Default
+        Me.modDesc.ForeColor = System.Drawing.Color.Black
+        Me.modDesc.Location = New System.Drawing.Point(13, 174)
+        Me.modDesc.Multiline = True
+        Me.modDesc.Name = "modDesc"
+        Me.modDesc.ReadOnly = True
+        Me.modDesc.Size = New System.Drawing.Size(605, 108)
+        Me.modDesc.TabIndex = 6
+        '
+        'modVersion
+        '
+        Me.modVersion.AutoSize = True
+        Me.modVersion.Location = New System.Drawing.Point(228, 85)
+        Me.modVersion.Name = "modVersion"
+        Me.modVersion.Size = New System.Drawing.Size(42, 13)
+        Me.modVersion.TabIndex = 7
+        Me.modVersion.Text = "Version"
+        '
+        'modMCVersion
+        '
+        Me.modMCVersion.AutoSize = True
+        Me.modMCVersion.Location = New System.Drawing.Point(272, 102)
+        Me.modMCVersion.Name = "modMCVersion"
+        Me.modMCVersion.Size = New System.Drawing.Size(58, 13)
+        Me.modMCVersion.TabIndex = 8
+        Me.modMCVersion.Text = "MCVersion"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(175, 128)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 13)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Credits: "
+        '
+        'modCredits
+        '
+        Me.modCredits.AutoSize = True
+        Me.modCredits.Location = New System.Drawing.Point(226, 128)
+        Me.modCredits.Name = "modCredits"
+        Me.modCredits.Size = New System.Drawing.Size(38, 13)
+        Me.modCredits.TabIndex = 10
+        Me.modCredits.Text = "credits"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(175, 141)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(49, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Authors: "
+        '
+        'modAuthors
+        '
+        Me.modAuthors.AutoSize = True
+        Me.modAuthors.Location = New System.Drawing.Point(230, 141)
+        Me.modAuthors.Name = "modAuthors"
+        Me.modAuthors.Size = New System.Drawing.Size(43, 13)
+        Me.modAuthors.TabIndex = 12
+        Me.modAuthors.Text = "Authors"
+        '
+        'modURL
+        '
+        Me.modURL.AutoSize = True
+        Me.modURL.Location = New System.Drawing.Point(174, 38)
+        Me.modURL.Name = "modURL"
+        Me.modURL.Size = New System.Drawing.Size(59, 13)
+        Me.modURL.TabIndex = 13
+        Me.modURL.TabStop = True
+        Me.modURL.Text = "LinkLabel1"
+        '
         'ModInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(630, 391)
+        Me.ClientSize = New System.Drawing.Size(630, 432)
+        Me.Controls.Add(Me.modURL)
+        Me.Controls.Add(Me.modAuthors)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.modCredits)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.modMCVersion)
+        Me.Controls.Add(Me.modVersion)
+        Me.Controls.Add(Me.modDesc)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.modLogo)
@@ -100,7 +192,7 @@ Partial Class ModInfo
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.Name = "ModInfo"
-        Me.Text = "Mod Information"
+        Me.Text = "0"
         Me.TopMost = True
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -114,4 +206,12 @@ Partial Class ModInfo
     Friend WithEvents modLogo As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents modDesc As TextBox
+    Friend WithEvents modVersion As Label
+    Friend WithEvents modMCVersion As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents modCredits As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents modAuthors As Label
+    Friend WithEvents modURL As LinkLabel
 End Class

@@ -32,7 +32,7 @@ Module ModInfoParser
 
         Dim toReturnArray = {Modid, Name, Desc, Version}
 
-        testmsg(toReturnArray.ToString())
+        Return toReturnArray
     End Function
 
     Function checkEven(a)
