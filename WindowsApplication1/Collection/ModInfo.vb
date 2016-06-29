@@ -7,6 +7,11 @@
         modName.Text = ModInfo(1)
         modDesc.Text = ModInfo(2)
         modVersion.Text = ModInfo(3)
+        modCredits.Text = ModInfo(4)
+        modLogo.ImageLocation = "C:\Tfff1\SimpleMC\Mod_Extract\" + ModInfo(5)
+        modMCVersion.Text = ModInfo(6)
+        modURL.Text = ModInfo(7)
+        modURL.
 
     End Sub
 

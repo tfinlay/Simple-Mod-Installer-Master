@@ -165,10 +165,10 @@ Partial Class ModInfo
         Me.modURL.AutoSize = True
         Me.modURL.Location = New System.Drawing.Point(174, 38)
         Me.modURL.Name = "modURL"
-        Me.modURL.Size = New System.Drawing.Size(59, 13)
+        Me.modURL.Size = New System.Drawing.Size(29, 13)
         Me.modURL.TabIndex = 13
         Me.modURL.TabStop = True
-        Me.modURL.Text = "LinkLabel1"
+        Me.modURL.Text = "URL"
         '
         'ModInfo
         '
