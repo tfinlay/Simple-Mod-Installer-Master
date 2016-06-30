@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ModInfo
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ModInfo
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.modName = New System.Windows.Forms.Label()
         Me.modID = New System.Windows.Forms.Label()
@@ -36,6 +36,7 @@ Partial Class ModInfo
         Me.Label5 = New System.Windows.Forms.Label()
         Me.modAuthors = New System.Windows.Forms.Label()
         Me.modURL = New System.Windows.Forms.LinkLabel()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,7 +53,7 @@ Partial Class ModInfo
         'modID
         '
         Me.modID.AutoSize = True
-        Me.modID.Location = New System.Drawing.Point(204, 60)
+        Me.modID.Location = New System.Drawing.Point(401, 60)
         Me.modID.Name = "modID"
         Me.modID.Size = New System.Drawing.Size(42, 13)
         Me.modID.TabIndex = 1
@@ -61,7 +62,7 @@ Partial Class ModInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(174, 60)
+        Me.Label1.Location = New System.Drawing.Point(371, 60)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(24, 13)
         Me.Label1.TabIndex = 2
@@ -72,14 +73,14 @@ Partial Class ModInfo
         Me.modLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.modLogo.Location = New System.Drawing.Point(13, 38)
         Me.modLogo.Name = "modLogo"
-        Me.modLogo.Size = New System.Drawing.Size(155, 129)
+        Me.modLogo.Size = New System.Drawing.Size(352, 124)
         Me.modLogo.TabIndex = 3
         Me.modLogo.TabStop = False
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(174, 85)
+        Me.Label2.Location = New System.Drawing.Point(371, 85)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 13)
         Me.Label2.TabIndex = 4
@@ -88,7 +89,7 @@ Partial Class ModInfo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(174, 102)
+        Me.Label3.Location = New System.Drawing.Point(371, 102)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 13)
         Me.Label3.TabIndex = 5
@@ -99,7 +100,7 @@ Partial Class ModInfo
         Me.modDesc.BackColor = System.Drawing.Color.White
         Me.modDesc.Cursor = System.Windows.Forms.Cursors.Default
         Me.modDesc.ForeColor = System.Drawing.Color.Black
-        Me.modDesc.Location = New System.Drawing.Point(13, 174)
+        Me.modDesc.Location = New System.Drawing.Point(12, 168)
         Me.modDesc.Multiline = True
         Me.modDesc.Name = "modDesc"
         Me.modDesc.ReadOnly = True
@@ -109,7 +110,7 @@ Partial Class ModInfo
         'modVersion
         '
         Me.modVersion.AutoSize = True
-        Me.modVersion.Location = New System.Drawing.Point(228, 85)
+        Me.modVersion.Location = New System.Drawing.Point(425, 85)
         Me.modVersion.Name = "modVersion"
         Me.modVersion.Size = New System.Drawing.Size(42, 13)
         Me.modVersion.TabIndex = 7
@@ -118,7 +119,7 @@ Partial Class ModInfo
         'modMCVersion
         '
         Me.modMCVersion.AutoSize = True
-        Me.modMCVersion.Location = New System.Drawing.Point(272, 102)
+        Me.modMCVersion.Location = New System.Drawing.Point(469, 102)
         Me.modMCVersion.Name = "modMCVersion"
         Me.modMCVersion.Size = New System.Drawing.Size(58, 13)
         Me.modMCVersion.TabIndex = 8
@@ -127,7 +128,7 @@ Partial Class ModInfo
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(175, 128)
+        Me.Label4.Location = New System.Drawing.Point(372, 128)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 13)
         Me.Label4.TabIndex = 9
@@ -136,7 +137,7 @@ Partial Class ModInfo
         'modCredits
         '
         Me.modCredits.AutoSize = True
-        Me.modCredits.Location = New System.Drawing.Point(226, 128)
+        Me.modCredits.Location = New System.Drawing.Point(423, 128)
         Me.modCredits.Name = "modCredits"
         Me.modCredits.Size = New System.Drawing.Size(38, 13)
         Me.modCredits.TabIndex = 10
@@ -145,7 +146,7 @@ Partial Class ModInfo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(175, 141)
+        Me.Label5.Location = New System.Drawing.Point(372, 141)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(49, 13)
         Me.Label5.TabIndex = 11
@@ -154,7 +155,7 @@ Partial Class ModInfo
         'modAuthors
         '
         Me.modAuthors.AutoSize = True
-        Me.modAuthors.Location = New System.Drawing.Point(230, 141)
+        Me.modAuthors.Location = New System.Drawing.Point(427, 141)
         Me.modAuthors.Name = "modAuthors"
         Me.modAuthors.Size = New System.Drawing.Size(43, 13)
         Me.modAuthors.TabIndex = 12
@@ -163,18 +164,29 @@ Partial Class ModInfo
         'modURL
         '
         Me.modURL.AutoSize = True
-        Me.modURL.Location = New System.Drawing.Point(174, 38)
+        Me.modURL.Location = New System.Drawing.Point(371, 38)
         Me.modURL.Name = "modURL"
         Me.modURL.Size = New System.Drawing.Size(29, 13)
         Me.modURL.TabIndex = 13
         Me.modURL.TabStop = True
         Me.modURL.Text = "URL"
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(9, 279)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(608, 13)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "NOTE: This mod file may contain more than one mod. The mod information displayed " &
+    "is the first one found in the mcmod.info file."
+        '
         'ModInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(630, 432)
+        Me.ClientSize = New System.Drawing.Size(630, 296)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.modURL)
         Me.Controls.Add(Me.modAuthors)
         Me.Controls.Add(Me.Label5)
@@ -214,4 +226,5 @@ Partial Class ModInfo
     Friend WithEvents Label5 As Label
     Friend WithEvents modAuthors As Label
     Friend WithEvents modURL As LinkLabel
+    Friend WithEvents Label6 As Label
 End Class
