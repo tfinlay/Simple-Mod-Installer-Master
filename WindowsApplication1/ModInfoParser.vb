@@ -1,6 +1,5 @@
 ﻿Imports Newtonsoft.Json
 Imports System.IO
-Imports Daishi.Microservices.Components.Serialisation
 
 Module ModInfoParser
     ''' <summary>

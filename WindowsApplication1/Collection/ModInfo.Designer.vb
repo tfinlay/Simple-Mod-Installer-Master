@@ -37,6 +37,7 @@ Partial Class ModInfo
         Me.modAuthors = New System.Windows.Forms.Label()
         Me.modURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.notFound = New System.Windows.Forms.Label()
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -181,11 +182,22 @@ Partial Class ModInfo
         Me.Label6.Text = "NOTE: This mod file may contain more than one mod. The mod information displayed " &
     "is the first one found in the mcmod.info file."
         '
+        'notFound
+        '
+        Me.notFound.AutoSize = True
+        Me.notFound.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.notFound.Location = New System.Drawing.Point(107, 97)
+        Me.notFound.Name = "notFound"
+        Me.notFound.Size = New System.Drawing.Size(147, 18)
+        Me.notFound.TabIndex = 15
+        Me.notFound.Text = "Mod Logo not Found"
+        '
         'ModInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(630, 296)
+        Me.Controls.Add(Me.notFound)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.modURL)
         Me.Controls.Add(Me.modAuthors)
@@ -227,4 +239,5 @@ Partial Class ModInfo
     Friend WithEvents modAuthors As Label
     Friend WithEvents modURL As LinkLabel
     Friend WithEvents Label6 As Label
+    Friend WithEvents notFound As Label
 End Class

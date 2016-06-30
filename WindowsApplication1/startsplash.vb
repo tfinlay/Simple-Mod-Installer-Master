@@ -53,21 +53,12 @@ Public NotInheritable Class startsplash
         My.Settings.appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         My.Settings.Save()
 
-        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Logo.png") Then
+        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
             Bar1.Visible = True
             Label2.Visible = True
             Dim client2 As WebClient = New WebClient
             AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
-            client2.DownloadFileAsync(New Uri(""), "")
-        End If
-
-        If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) And My.Computer.Network.IsAvailable Then
-            Bar1.Visible = True
-            Label2.Visible = True
-            Dim client As WebClient = New WebClient
-            'AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
-            AddHandler client.DownloadFileCompleted, AddressOf client_DownloadCompleted
-            client.DownloadFileAsync(New Uri("http://drive.google.com/uc?export=download&id=0BzZlcNkakawtem5xZGdZRzlfR0E"), "C:\Tfff1\Simple_MC\WorldBackup.exe")
+            client2.DownloadFileAsync(New Uri("https://cdn.sentieo.com/images/default_icon.jpg"), "C:\Tfff1\Simple_MC\notFound.png")
         End If
     End Sub
 
@@ -76,6 +67,17 @@ Public NotInheritable Class startsplash
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
         Dim percentage As Double = bytesIn / totalBytes * 100
         Bar1.Value = Integer.Parse(Math.Truncate(percentage).ToString())
+    End Sub
+
+    Private Sub client2_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+        If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) And My.Computer.Network.IsAvailable Then
+            Bar1.Visible = True
+            Label2.Visible = True
+            Dim client As WebClient = New WebClient
+            'AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
+            AddHandler client.DownloadFileCompleted, AddressOf client_DownloadCompleted
+            client.DownloadFileAsync(New Uri("http://drive.google.com/uc?export=download&id=0BzZlcNkakawtem5xZGdZRzlfR0E"), "C:\Tfff1\Simple_MC\WorldBackup.exe")
+        End If
     End Sub
 
     Private Sub client_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)

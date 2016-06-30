@@ -25,8 +25,9 @@ Public Class ModInfo
             modCredits.Text = ModInfo(4)
             Try
                 modLogo.BackgroundImage = System.Drawing.Image.FromFile(Workspace + ModInfo(5))
+                notFound.Visible = False
             Catch ex As Exception
-                modLogo.BackgroundImage = System.
+                notFound.Visible = True
             End Try
             modMCVersion.Text = ModInfo(6)
             modURL.Text = ModInfo(7)
