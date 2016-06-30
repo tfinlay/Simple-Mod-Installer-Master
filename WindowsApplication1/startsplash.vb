@@ -32,6 +32,12 @@ Public NotInheritable Class startsplash
             My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Mod_Collections_Export")
         End If
 
+        Try
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Workspace", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        Catch ex As Exception
+
+        End Try
+
         'Scans Mod_Collections for folders - Overwrites collections.txt with the results.
         Call Collection_FolderScan(Me, "C:\Tfff1\Simple_MC\Mod_Collections", False, "C:\Tfff1\Simple_MC\Mod_Collections\collections.txt", True)
 
@@ -46,6 +52,14 @@ Public NotInheritable Class startsplash
 
         My.Settings.appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         My.Settings.Save()
+
+        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Logo.png") Then
+            Bar1.Visible = True
+            Label2.Visible = True
+            Dim client2 As WebClient = New WebClient
+            AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
+            client2.DownloadFileAsync(New Uri(""), "")
+        End If
 
         If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) And My.Computer.Network.IsAvailable Then
             Bar1.Visible = True

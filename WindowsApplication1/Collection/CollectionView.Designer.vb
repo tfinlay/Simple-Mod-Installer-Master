@@ -33,6 +33,7 @@ Partial Class CollectionView
         Me.AddMod = New System.Windows.Forms.Button()
         Me.ModList = New System.Windows.Forms.CheckedListBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DisplayModInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeselectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RemoveAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,7 +48,6 @@ Partial Class CollectionView
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.DisplayModInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -140,7 +140,13 @@ Partial Class CollectionView
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DisplayModInfoToolStripMenuItem, Me.SelectAllToolStripMenuItem, Me.DeselectAllToolStripMenuItem, Me.RemoveAllToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(165, 114)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(165, 92)
+        '
+        'DisplayModInfoToolStripMenuItem
+        '
+        Me.DisplayModInfoToolStripMenuItem.Name = "DisplayModInfoToolStripMenuItem"
+        Me.DisplayModInfoToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.DisplayModInfoToolStripMenuItem.Text = "Display Mod Info"
         '
         'SelectAllToolStripMenuItem
         '
@@ -259,12 +265,6 @@ Partial Class CollectionView
         Me.Button7.TabIndex = 29
         Me.Button7.Text = "DELETE COLLECTION"
         Me.Button7.UseVisualStyleBackColor = True
-        '
-        'DisplayModInfoToolStripMenuItem
-        '
-        Me.DisplayModInfoToolStripMenuItem.Name = "DisplayModInfoToolStripMenuItem"
-        Me.DisplayModInfoToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
-        Me.DisplayModInfoToolStripMenuItem.Text = "Display Mod Info"
         '
         'CollectionView
         '

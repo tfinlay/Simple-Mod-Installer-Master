@@ -85,27 +85,27 @@ Public Class CollectionView
 
             End If
 
-            If My.Computer.FileSystem.FileExists(currentLocation) Then
-                    Try
-                        My.Computer.FileSystem.DeleteFile(currentLocation)
-                        ModInt2 = ModInt2 + 1
-                    Catch
-                        MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
-                    End Try
-                ElseIf File.Exists(CurrentLocation2) Then
-                    Try
-                        My.Computer.FileSystem.DeleteFile(CurrentLocation2)
-                        ModInt2 = ModInt2 + 1
-                    Catch
-                        MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
-                    End Try
-                Else
-                    MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
-                End If
-            Next
-            MsgBox("Successfully Removed " + ModInt2.ToString + " mods from collection")
+            If My.Computer.FileSystem.FileExists(CurrentLocation) Then
+                Try
+                    My.Computer.FileSystem.DeleteFile(CurrentLocation)
+                    ModInt2 = ModInt2 + 1
+                Catch
+                    MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+                End Try
+            ElseIf File.Exists(CurrentLocation2) Then
+                Try
+                    My.Computer.FileSystem.DeleteFile(CurrentLocation2)
+                    ModInt2 = ModInt2 + 1
+                Catch
+                    MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+                End Try
+            Else
+                MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
+            End If
+        Next
+        MsgBox("Successfully Removed " + ModInt2.ToString + " mods from collection")
 
-            Call Load_Manager()
+        Call Load_Manager()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -273,10 +273,48 @@ Public Class CollectionView
 
     Private Sub DisplayModInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayModInfoToolStripMenuItem.Click
         If Not ModList.SelectedItems.Count > 1 Then
+            For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+                Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+
+                Dim CurrentLocation As String
+                Dim CurrentLocation2 As String
+
+                If Button4.Text = "View Disabled Mods" Then
+                    CurrentLocation = Path + "\mods\" + l_text
+                    CurrentLocation2 = Path + "\mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+
+                Else
+                    CurrentLocation = Path + "\DisabledMods\" + l_text
+                    CurrentLocation2 = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+
+                End If
+
+                If My.Computer.FileSystem.FileExists(CurrentLocation) Then
+
+                    My.Settings.ModFile = CurrentLocation
+                    My.Settings.Save()
+                    ModInt2 = ModInt2 + 1
+                ElseIf File.Exists(CurrentLocation2) Then
+                    My.Settings.ModFile = CurrentLocation2
+                    My.Settings.Save()
+                    ModInt2 = ModInt2 + 1
+                Else
+                    MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
+                End If
+            Next
+
             ModInfo.Show()
-            Me.Enabled = False
+            Enabled = False
         Else
             MsgBox("ERROR: You can only select one Mod at a time for Information Viewing.")
         End If
+    End Sub
+
+    Private Sub CollectionView_EnabledChanged(sender As Object, e As EventArgs) Handles MyBase.EnabledChanged
+        Try
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Workspace", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        Catch ex As Exception
+            'Obviously not exiting from Item Info Viewer
+        End Try
     End Sub
 End Class
