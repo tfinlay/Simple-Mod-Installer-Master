@@ -163,7 +163,7 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "Minecraft Simple Mod Installer"
-        Me.TransparencyKey = System.Drawing.SystemColors.Control
+        Me.TransparencyKey = System.Drawing.SystemColors.MenuHighlight
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

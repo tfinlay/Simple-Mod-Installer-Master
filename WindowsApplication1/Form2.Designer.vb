@@ -28,7 +28,6 @@ Partial Class Form2
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -86,15 +85,6 @@ Partial Class Form2
         Me.PictureBox1.TabIndex = 6
         Me.PictureBox1.TabStop = False
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(238, 324)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(84, 30)
-        Me.Button3.TabIndex = 7
-        Me.Button3.Text = "Classic View"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
@@ -148,7 +138,6 @@ Partial Class Form2
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -169,7 +158,6 @@ Partial Class Form2
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Button3 As Button
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents Label3 As Label

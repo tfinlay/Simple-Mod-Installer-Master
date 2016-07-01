@@ -272,7 +272,7 @@ Public Class CollectionView
     End Sub
 
     Private Sub DisplayModInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayModInfoToolStripMenuItem.Click
-        If Not ModList.SelectedItems.Count > 1 Then
+        If ModList.SelectedItems.Count = 1 Then
             For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
                 Dim l_text As String = CStr(ModList.CheckedItems(l_index))
 
@@ -302,11 +302,14 @@ Public Class CollectionView
                     MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
                 End If
             Next
+            Try
+                Enabled = False
+                ModInfo.Show()
+            Catch ex As Exception
 
-            ModInfo.Show()
-            Enabled = False
+            End Try
         Else
-            MsgBox("ERROR: You can only select one Mod at a time for Information Viewing.")
+            MsgBox("ERROR: Please select a specific mod to view (i.e. tick only 1 mod).")
         End If
     End Sub
 

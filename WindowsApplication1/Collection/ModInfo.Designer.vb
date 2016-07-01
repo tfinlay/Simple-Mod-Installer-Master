@@ -33,8 +33,6 @@ Partial Class ModInfo
         Me.modMCVersion = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.modCredits = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.modAuthors = New System.Windows.Forms.Label()
         Me.modURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.notFound = New System.Windows.Forms.Label()
@@ -144,24 +142,6 @@ Partial Class ModInfo
         Me.modCredits.TabIndex = 10
         Me.modCredits.Text = "credits"
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(372, 141)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(49, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Authors: "
-        '
-        'modAuthors
-        '
-        Me.modAuthors.AutoSize = True
-        Me.modAuthors.Location = New System.Drawing.Point(427, 141)
-        Me.modAuthors.Name = "modAuthors"
-        Me.modAuthors.Size = New System.Drawing.Size(43, 13)
-        Me.modAuthors.TabIndex = 12
-        Me.modAuthors.Text = "Authors"
-        '
         'modURL
         '
         Me.modURL.AutoSize = True
@@ -200,8 +180,6 @@ Partial Class ModInfo
         Me.Controls.Add(Me.notFound)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.modURL)
-        Me.Controls.Add(Me.modAuthors)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.modCredits)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.modMCVersion)
@@ -235,8 +213,6 @@ Partial Class ModInfo
     Friend WithEvents modMCVersion As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents modCredits As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents modAuthors As Label
     Friend WithEvents modURL As LinkLabel
     Friend WithEvents Label6 As Label
     Friend WithEvents notFound As Label
