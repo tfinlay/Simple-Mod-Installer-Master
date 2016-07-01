@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Public NotInheritable Class startsplash
+    Public NewtonSoftJson As Object
     Private Sub startsplash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Bar1.Visible = False
         Label2.Visible = False
@@ -53,13 +54,17 @@ Public NotInheritable Class startsplash
         My.Settings.appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         My.Settings.Save()
 
-        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
+        If My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\NewtonsoftJson\Newtonsoft.Json.dll") Then
+
+        Else
             Bar1.Visible = True
             Label2.Visible = True
-            Dim client2 As WebClient = New WebClient
-            AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
-            client2.DownloadFileAsync(New Uri("https://cdn.sentieo.com/images/default_icon.jpg"), "C:\Tfff1\Simple_MC\notFound.png")
+            Dim dllclient As WebClient = New WebClient
+            AddHandler dllclient.DownloadFileCompleted, AddressOf Dll_DownloadCompleted
+            AddHandler dllclient.DownloadProgressChanged, AddressOf client_ProgressChanged
+            dllclient.DownloadFileAsync(New Uri("https://github.com/JamesNK/Newtonsoft.Json/releases/download/9.0.1/Json90r1.zip"), "C:\Tfff1\Simple_MC\jsonDotNet.zip")
         End If
+
     End Sub
 
     Private Sub client_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
@@ -77,6 +82,22 @@ Public NotInheritable Class startsplash
             'AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
             AddHandler client.DownloadFileCompleted, AddressOf client_DownloadCompleted
             client.DownloadFileAsync(New Uri("http://drive.google.com/uc?export=download&id=0BzZlcNkakawtem5xZGdZRzlfR0E"), "C:\Tfff1\Simple_MC\WorldBackup.exe")
+        End If
+    End Sub
+
+    Private Sub Dll_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+
+        System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Simple_MC\jsonDotNet.zip", "C:\Tfff1\Simple_MC\jsonDoNetExtracted")
+
+        My.Computer.FileSystem.CopyDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted\Bin\Net45", "C:\Tfff1\Simple_MC\NewtonsoftJson", True)
+        My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted", FileIO.DeleteDirectoryOption.DeleteAllContents)
+
+        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
+            Bar1.Visible = True
+            Label2.Visible = True
+            Dim client2 As WebClient = New WebClient
+            AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
+            client2.DownloadFileAsync(New Uri("https://cdn.sentieo.com/images/default_icon.jpg"), "C:\Tfff1\Simple_MC\notFound.png")
         End If
     End Sub
 
