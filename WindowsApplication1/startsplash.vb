@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Public NotInheritable Class startsplash
-    Private Async Sub startsplash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub startsplash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Bar1.Visible = False
         Label2.Visible = False
 
