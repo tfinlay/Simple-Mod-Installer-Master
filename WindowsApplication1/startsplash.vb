@@ -2,6 +2,7 @@
 Imports System.Net
 Public NotInheritable Class startsplash
     Public NewtonSoftJson As Object
+    Dim unzipDLL As Boolean
     Private Sub startsplash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Bar1.Visible = False
         Label2.Visible = False
@@ -34,7 +35,7 @@ Public NotInheritable Class startsplash
         End If
 
         Try
-            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Workspace", FileIO.DeleteDirectoryOption.DeleteAllContents)
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Info_Finder\Mod_Data\", FileIO.DeleteDirectoryOption.DeleteAllContents)
         Catch ex As Exception
 
         End Try
@@ -54,15 +55,17 @@ Public NotInheritable Class startsplash
         My.Settings.appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
         My.Settings.Save()
 
-        If My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\NewtonsoftJson\Newtonsoft.Json.dll") Then
-
-        Else
+        If Not My.Computer.FileSystem.DirectoryExists("C:\Tfff1\Simple_MC\Mod_Info_Finder") Then
+            unzipDLL = True
             Bar1.Visible = True
             Label2.Visible = True
             Dim dllclient As WebClient = New WebClient
             AddHandler dllclient.DownloadFileCompleted, AddressOf Dll_DownloadCompleted
             AddHandler dllclient.DownloadProgressChanged, AddressOf client_ProgressChanged
             dllclient.DownloadFileAsync(New Uri("https://github.com/JamesNK/Newtonsoft.Json/releases/download/9.0.1/Json90r1.zip"), "C:\Tfff1\Simple_MC\jsonDotNet.zip")
+        Else
+            unzipDLL = False
+            Call Dll_DownloadCompleted(Me, Nothing)
         End If
 
     End Sub
@@ -86,12 +89,12 @@ Public NotInheritable Class startsplash
     End Sub
 
     Private Sub Dll_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+        If unzipDLL = True Then
+            System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Simple_MC\jsonDotNet.zip", "C:\Tfff1\Simple_MC\jsonDoNetExtracted")
 
-        System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Simple_MC\jsonDotNet.zip", "C:\Tfff1\Simple_MC\jsonDoNetExtracted")
-
-        My.Computer.FileSystem.CopyDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted\Bin\Net45", "C:\Tfff1\Simple_MC\NewtonsoftJson", True)
-        My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted", FileIO.DeleteDirectoryOption.DeleteAllContents)
-
+            My.Computer.FileSystem.CopyDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted\Bin\Net45", "C:\Tfff1\Simple_MC\NewtonsoftJson", True)
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\jsonDoNetExtracted", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        End If
         If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
             Bar1.Visible = True
             Label2.Visible = True

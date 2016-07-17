@@ -315,7 +315,7 @@ Public Class CollectionView
 
     Private Sub CollectionView_EnabledChanged(sender As Object, e As EventArgs) Handles MyBase.EnabledChanged
         Try
-            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Workspace", FileIO.DeleteDirectoryOption.DeleteAllContents)
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Mod_Info_Finder\Mod_Data", FileIO.DeleteDirectoryOption.DeleteAllContents)
         Catch ex As Exception
             'Obviously not exiting from Item Info Viewer
         End Try

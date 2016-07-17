@@ -22,6 +22,7 @@ Partial Class ModInfo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.modName = New System.Windows.Forms.Label()
         Me.modID = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -36,7 +37,11 @@ Partial Class ModInfo
         Me.modURL = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.notFound = New System.Windows.Forms.Label()
+        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ReloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'modName
@@ -172,11 +177,34 @@ Partial Class ModInfo
         Me.notFound.TabIndex = 15
         Me.notFound.Text = "Mod Logo not Found"
         '
+        'WebBrowser1
+        '
+        Me.WebBrowser1.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.WebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.WebBrowser1.Location = New System.Drawing.Point(0, 0)
+        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.WebBrowser1.Name = "WebBrowser1"
+        Me.WebBrowser1.Size = New System.Drawing.Size(651, 374)
+        Me.WebBrowser1.TabIndex = 16
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(111, 26)
+        '
+        'ReloadToolStripMenuItem
+        '
+        Me.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem"
+        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
+        Me.ReloadToolStripMenuItem.Text = "Reload"
+        '
         'ModInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(630, 296)
+        Me.ClientSize = New System.Drawing.Size(651, 374)
+        Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.notFound)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.modURL)
@@ -194,9 +222,9 @@ Partial Class ModInfo
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.Name = "ModInfo"
-        Me.Text = "0"
-        Me.TopMost = True
+        Me.Text = "Mod Information"
         CType(Me.modLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -216,4 +244,7 @@ Partial Class ModInfo
     Friend WithEvents modURL As LinkLabel
     Friend WithEvents Label6 As Label
     Friend WithEvents notFound As Label
+    Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ReloadToolStripMenuItem As ToolStripMenuItem
 End Class

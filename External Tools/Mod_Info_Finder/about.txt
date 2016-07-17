@@ -1,0 +1,1 @@
+To be unzipped in C:\Tfff1\Simple_MC to create folder C:\Tfff1\Simple_MC\Mod_Info_Finder and it's contents, used to display Mod Info in ModInfo.vb
