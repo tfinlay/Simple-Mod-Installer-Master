@@ -62,7 +62,7 @@ Public NotInheritable Class startsplash
             Dim dllclient As WebClient = New WebClient
             AddHandler dllclient.DownloadFileCompleted, AddressOf Dll_DownloadCompleted
             AddHandler dllclient.DownloadProgressChanged, AddressOf client_ProgressChanged
-            dllclient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/tfff1OFFICIAL/Simple-Mod-Installer-Master/master/External%20Tools/Mod_Info_Finder/Mod_Info_Finder.zip"), "C:\Tfff1\Simple_MC\Mod_Info_Finder.zip")
+            dllclient.DownloadFileAsync(New Uri("https://github.com/tfff1OFFICIAL/Simple-Mod-Installer-Master/raw/master/External%20Tools/Mod_Info_Finder/Mod_Info_Finder.zip"), "C:\Tfff1\Mod_Info_Finder.zip")
         Else
             unzipDLL = False
             Call Dll_DownloadCompleted(Me, Nothing)
@@ -90,8 +90,8 @@ Public NotInheritable Class startsplash
 
     Private Sub Dll_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         If unzipDLL = True Then
-            System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Simple_MC\Mod_Info_Finder.zip", "C:\Tfff1\Simple_MC")
-            IO.File.Delete("C:\Tfff1\Simple_MC\Mod_Info_Finder.zip")
+            System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Mod_Info_Finder.zip", "C:\Tfff1\Simple_MC")
+            IO.File.Delete("C:\Tfff1\Mod_Info_Finder.zip")
         End If
         If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
             Bar1.Visible = True
