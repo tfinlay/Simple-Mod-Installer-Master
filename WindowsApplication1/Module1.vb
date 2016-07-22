@@ -41,9 +41,43 @@ Module module1
         Return
     End Sub
 
+    Public Function functionalPathTrimmer(fileName As String)
+        Dim result As String
+        result = Path.GetFileName(fileName)
+        Return result
+    End Function
+
+    Public Function isPathFile(path As String)
+        Try
+            Dim attr = File.GetAttributes(path)
+            If attr = FileAttributes.Directory Then
+                Return False
+            Else
+                Return True
+            End If
+        Catch ex As Exception
+            testmsg(ex.ToString())
+            Return Nothing
+        End Try
+    End Function
+
     Public Function testmsg(message As String)
         If My.Settings.TestEnvironment = True Then
             MsgBox(message)
         End If
     End Function
+
+    Public Sub checkAll(checkedListBox As Object)
+        Dim checked As Boolean = True   ' Set to True or False, as required.
+        For i As Integer = 0 To checkedListBox.Items.Count - 1
+            checkedListBox.SetItemChecked(i, checked)
+        Next
+    End Sub
+
+    Public Sub uncheckAll(checkedListBox As Object)
+        Dim checked As Boolean = False   ' Set to True or False, as required.
+        For i As Integer = 0 To checkedListBox.Items.Count - 1
+            checkedListBox.SetItemChecked(i, checked)
+        Next
+    End Sub
 End Module

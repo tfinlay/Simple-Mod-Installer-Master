@@ -238,4 +238,60 @@ DeleteSuccess:
         Next
         InvisibleListBox.Items.Clear()
     End Sub
+
+    Private Sub drag_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop, ModList.DragDrop
+        Dim theFiles() As String = CType(e.Data.GetData("FileDrop", True), String())
+
+        If Not SubDirectoriesList.SelectedItem.ToString = "" Then
+            My.Settings.AddFiles_BasePath = Path + "\" + SubDirectoriesList.SelectedItem.ToString + "\"
+            My.Settings.Save()
+
+            For Each currentFile As String In theFiles
+                'Copy that
+                Dim BasePath As String = My.Settings.AddFiles_BasePath
+                Dim trimmedFileName As String = functionalPathTrimmer(currentFile)
+
+                If Not currentFile = "" Then
+                    If isPathFile(currentFile) = True Then
+                        If Not My.Computer.FileSystem.FileExists(BasePath + trimmedFileName) Then
+                            My.Computer.FileSystem.CopyFile(currentFile, BasePath + trimmedFileName)
+                        Else
+                            MsgBox("The selected file already exists in your collection.")
+                        End If
+                    ElseIf isPathFile(currentFile) = False Then
+                        Try
+                            My.Computer.FileSystem.CopyDirectory(currentFile, BasePath + trimmedFileName)
+                        Catch ex As Exception
+                            MsgBox("An error occured when copying this directory: " + currentFile.ToString() + " The error was: " + ex.ToString())
+                        End Try
+                    End If
+                Else
+                    MsgBox("Please select a file to add before continuing.")
+
+                End If
+            Next
+            Call Collection_FolderView_LoadManager()
+        Else
+            MsgBox("Please select a Folder to add a file to it.")
+        End If
+    End Sub
+
+    Private Sub drag_DragEnter(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragEnter, ModList.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub SelectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
+        checkAll(ModList)
+    End Sub
+
+    Private Sub DeselectAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeselectAllToolStripMenuItem.Click
+        uncheckAll(ModList)
+    End Sub
+
+    Private Sub RemoveAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveAllToolStripMenuItem.Click
+        checkAll(ModList)
+        DelFile.PerformClick()
+    End Sub
 End Class

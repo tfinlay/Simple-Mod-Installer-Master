@@ -128,6 +128,7 @@ Partial Class CollectionView
         '
         'ModList
         '
+        Me.ModList.AllowDrop = True
         Me.ModList.CheckOnClick = True
         Me.ModList.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ModList.FormattingEnabled = True
@@ -268,6 +269,7 @@ Partial Class CollectionView
         '
         'CollectionView
         '
+        Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)

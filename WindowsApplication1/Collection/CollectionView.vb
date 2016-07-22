@@ -52,6 +52,9 @@ Public Class CollectionView
 
         ModList.Sorted = My.Settings.sortLists
 
+        'Allow Drag & Drop Mod Installation:
+        Me.AllowDrop = True
+
         Enabled = True
     End Sub
 
@@ -319,5 +322,46 @@ Public Class CollectionView
         Catch ex As Exception
             'Obviously not exiting from Item Info Viewer
         End Try
+    End Sub
+
+    Private Sub drag_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop, ModList.DragDrop
+        Dim theFiles() As String = CType(e.Data.GetData("FileDrop", True), String())
+
+        For Each currentFile As String In theFiles
+            testmsg("Working with path: " + currentFile.ToString() + "  isPathFile should return: " + isPathFile(currentFile).ToString())
+
+            My.Settings.AddFiles_BasePath = "C:\Tfff1\Simple_MC\Mod_Collections\" + My.Settings.SelectedCollection + "\mods\"
+            My.Settings.Save()
+
+            'Copy that
+            Dim BasePath As String = My.Settings.AddFiles_BasePath
+            Dim trimmedFileName As String = functionalPathTrimmer(currentFile)
+
+            If Not currentFile = "" Then
+                If isPathFile(currentFile) = True Then
+                    If Not My.Computer.FileSystem.FileExists(BasePath + trimmedFileName) Then
+                        My.Computer.FileSystem.CopyFile(currentFile, BasePath + trimmedFileName)
+                    Else
+                        MsgBox("The selected file already exists in your collection.")
+                    End If
+                ElseIf isPathFile(currentFile) = False Then
+                    Try
+                        My.Computer.FileSystem.CopyDirectory(currentFile, BasePath + trimmedFileName)
+                    Catch ex As Exception
+                        MsgBox("An error occured when copying this directory: " + currentFile.ToString() + " The error was: " + ex.ToString())
+                    End Try
+                End If
+            Else
+                MsgBox("Please select a file to add before continuing.")
+
+            End If
+        Next
+        Call Load_Manager()
+    End Sub
+
+    Private Sub drag_DragEnter(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragEnter, ModList.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
     End Sub
 End Class

@@ -44,6 +44,11 @@ Partial Class FolderView
         Me.SearchText = New System.Windows.Forms.TextBox()
         Me.InvisibleListBox = New System.Windows.Forms.ListBox()
         Me.EmptySubs = New System.Windows.Forms.Label()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeselectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SubDirectoriesList
@@ -250,8 +255,33 @@ Partial Class FolderView
     "folder"
         Me.EmptySubs.Visible = False
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectAllToolStripMenuItem, Me.DeselectAllToolStripMenuItem, Me.RemoveAllToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(136, 70)
+        '
+        'SelectAllToolStripMenuItem
+        '
+        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
+        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.SelectAllToolStripMenuItem.Text = "Select All"
+        '
+        'DeselectAllToolStripMenuItem
+        '
+        Me.DeselectAllToolStripMenuItem.Name = "DeselectAllToolStripMenuItem"
+        Me.DeselectAllToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.DeselectAllToolStripMenuItem.Text = "Deselect All"
+        '
+        'RemoveAllToolStripMenuItem
+        '
+        Me.RemoveAllToolStripMenuItem.Name = "RemoveAllToolStripMenuItem"
+        Me.RemoveAllToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.RemoveAllToolStripMenuItem.Text = "Remove all"
+        '
         'FolderView
         '
+        Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
@@ -281,6 +311,7 @@ Partial Class FolderView
         Me.Name = "FolderView"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "View Modded Folders"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -305,4 +336,8 @@ Partial Class FolderView
     Friend WithEvents SearchText As TextBox
     Friend WithEvents InvisibleListBox As ListBox
     Friend WithEvents EmptySubs As Label
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents SelectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeselectAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RemoveAllToolStripMenuItem As ToolStripMenuItem
 End Class
