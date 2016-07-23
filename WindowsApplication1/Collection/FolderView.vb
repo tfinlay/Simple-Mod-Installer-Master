@@ -272,7 +272,33 @@ DeleteSuccess:
             Next
             Call Collection_FolderView_LoadManager()
         Else
-            MsgBox("Please select a Folder to add a file to it.")
+            My.Settings.AddFiles_BasePath = Path + "\"
+            My.Settings.Save()
+
+            For Each currentFile As String In theFiles
+                'Copy that
+                Dim BasePath As String = My.Settings.AddFiles_BasePath
+                Dim trimmedFileName As String = functionalPathTrimmer(currentFile)
+
+                If Not currentFile = "" Then
+                    If isPathFile(currentFile) = True Then
+                        If Not My.Computer.FileSystem.FileExists(BasePath + trimmedFileName) Then
+                            My.Computer.FileSystem.CopyFile(currentFile, BasePath + trimmedFileName)
+                        Else
+                            MsgBox("The selected file already exists in your collection.")
+                        End If
+                    ElseIf isPathFile(currentFile) = False Then
+                        Try
+                            My.Computer.FileSystem.CopyDirectory(currentFile, BasePath + trimmedFileName)
+                        Catch ex As Exception
+                            MsgBox("An error occured when copying this directory: " + currentFile.ToString() + " The error was: " + ex.ToString())
+                        End Try
+                    End If
+                Else
+                    MsgBox("Please select a file to add before continuing.")
+                End If
+            Next
+            Call Collection_FolderView_LoadManager()
         End If
     End Sub
 

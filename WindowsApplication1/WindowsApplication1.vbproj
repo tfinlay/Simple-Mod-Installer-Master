@@ -227,6 +227,12 @@
     <Compile Include="Technicaddmodpage_selectmodpack.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="updateAvailable.Designer.vb">
+      <DependentUpon>updateAvailable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="updateAvailable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="World\World_InstallerFormZip.Designer.vb">
       <DependentUpon>World_InstallerFormZip.vb</DependentUpon>
     </Compile>
@@ -306,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Technicaddmodpage_selectmodpack.resx">
       <DependentUpon>Technicaddmodpage_selectmodpack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="updateAvailable.resx">
+      <DependentUpon>updateAvailable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="World\World_InstallerFormZip.resx">
       <DependentUpon>World_InstallerFormZip.vb</DependentUpon>

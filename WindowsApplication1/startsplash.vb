@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Reflection
+
 Public NotInheritable Class startsplash
     Public NewtonSoftJson As Object
     Dim unzipDLL As Boolean
@@ -77,12 +79,26 @@ Public NotInheritable Class startsplash
         Bar1.Value = Integer.Parse(Math.Truncate(percentage).ToString())
     End Sub
 
-    Private Sub client2_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+    'Private Sub client2_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+    Private Sub client2_DownloadCompleted()
+        If unzipDLL = True Then
+            My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Octokit")
+            My.Computer.FileSystem.CreateDirectory("C:\Tfff1\Simple_MC\Temp")
+            System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Simple_MC\Octokit.nupkg", "C:\Tfff1\Simple_MC\Temp")
+            IO.File.Delete("C:\Tfff1\Simple_MC\Octokit.nupkg")
+            unzipDLL = False
+            System.IO.File.Copy("C:\Tfff1\Simple_MC\Temp\lib\net45\Octokit.dll", "C:\Tfff1\Simple_MC\Octokit\Octokit.dll", True)
+            System.IO.File.Copy("C:\Tfff1\Simple_MC\Temp\lib\net45\Octokit.pdb", "C:\Tfff1\Simple_MC\Octokit\Octokit.pdb", True)
+            System.IO.File.Copy("C:\Tfff1\Simple_MC\Temp\lib\net45\Octokit.XML", "C:\Tfff1\Simple_MC\Octokit\Octokit.XML", True)
+            My.Computer.FileSystem.DeleteDirectory("C:\Tfff1\Simple_MC\Temp", FileIO.DeleteDirectoryOption.DeleteAllContents)
+            'loadOctokit()
+        End If
+
         If (Not System.IO.File.Exists("c:\Tfff1\Simple_MC\WorldBackup.exe")) And My.Computer.Network.IsAvailable Then
             Bar1.Visible = True
             Label2.Visible = True
             Dim client As WebClient = New WebClient
-            'AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
+            AddHandler client.DownloadProgressChanged, AddressOf client_ProgressChanged
             AddHandler client.DownloadFileCompleted, AddressOf client_DownloadCompleted
             client.DownloadFileAsync(New Uri("http://drive.google.com/uc?export=download&id=0BzZlcNkakawtem5xZGdZRzlfR0E"), "C:\Tfff1\Simple_MC\WorldBackup.exe")
         End If
@@ -92,14 +108,20 @@ Public NotInheritable Class startsplash
         If unzipDLL = True Then
             System.IO.Compression.ZipFile.ExtractToDirectory("C:\Tfff1\Mod_Info_Finder.zip", "C:\Tfff1\Simple_MC")
             IO.File.Delete("C:\Tfff1\Mod_Info_Finder.zip")
+            unzipDLL = False
         End If
-        If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\notFound.png") Then
-            Bar1.Visible = True
-            Label2.Visible = True
-            Dim client2 As WebClient = New WebClient
-            AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
-            client2.DownloadFileAsync(New Uri("https://cdn.sentieo.com/images/default_icon.jpg"), "C:\Tfff1\Simple_MC\notFound.png")
-        End If
+
+        ''Check for octokit: - used for version checking.
+        'If Not My.Computer.FileSystem.FileExists("C:\Tfff1\Simple_MC\Octokit\Octokit.dll") Then
+        '    unzipDLL = True
+        '    Bar1.Visible = True
+        '    Label2.Visible = True
+        '    Dim client2 As WebClient = New WebClient
+        '    'AddHandler client2.DownloadProgressChanged, AddressOf client_ProgressChanged
+        '    'AddHandler client2.DownloadFileCompleted, AddressOf client2_DownloadCompleted
+        '    client2.DownloadFile(New Uri("https://www.nuget.org/api/v2/package/Octokit/0.20.0"), "C:\Tfff1\Simple_MC\Octokit.nupkg")
+        'End If
+        Call client2_DownloadCompleted()
     End Sub
 
     Private Sub client_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
@@ -109,8 +131,4 @@ Public NotInheritable Class startsplash
 
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
-
-
-
-
 End Class

@@ -26,8 +26,10 @@ Module CollectionFunctions
         Try
             For Each File As IO.FileInfo In Folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
                 If Not File.Name.ToString.Contains(".CollectionInfo") Then
-                    sender.ModList.Items.Add(File.Name)
-                    Application.DoEvents()
+                    If Not File.Name.ToString() = "folders.txt" Then
+                        sender.ModList.Items.Add(File.Name)
+                        Application.DoEvents()
+                    End If
                 End If
             Next
         Catch
@@ -246,11 +248,12 @@ Scan:
                     sender.successList.items.add("Found CollectionInfo File of activated Collection: " + File.Name.ToString)
                     CurrentlyEnabledFile = File.Name.ToString
                     Application.DoEvents()
-                    GoTo CheckDone
+                    'GoTo CheckDone
+                    Exit For
                 End If
             Next
 CheckDone:
-            testmsg("Skipped to CheckDone")
+            testmsg("Arrived at CheckDone")
             'Now get the Collection's Name out of the CollectionInfo File
             Try
                 Dim currentLine As String
@@ -269,8 +272,16 @@ Scan:
                     End If
                 End Using
             Catch ex As Exception
-                MsgBox("An Error ocurred when reading information from currently enabled Collection's .CollectionInfo File")
-                Return
+                Dim result As Integer = MessageBox.Show("An Error ocurred when reading information from currently enabled Collection's .CollectionInfo File. Will now proceed to delete everything in our way.", "Warning", MessageBoxButtons.OKCancel)
+                If result = DialogResult.Cancel Then
+                    MsgBox("Collection: " + My.Settings.CurrentlyActivated + " Activation failed! The Reason: You we encountered an error when reading the currently enabled collection's .CollectionInfo File and asked you for permission to overwrite the activated mods folder with the new one. This error occurred because you denied this permission. Try again later.")
+                    Activation.PermittedClose = True
+                    Activation.Close()
+                ElseIf result = DialogResult.OK Then
+                    My.Computer.FileSystem.DeleteDirectory(appdata + "\.minecraft\mods", FileIO.DeleteDirectoryOption.DeleteAllContents)
+                    Call ActivateCollection(sender)
+                Exit Sub
+                End If
             End Try
 
             'Check if names match each other - if they don't something is wrong!
