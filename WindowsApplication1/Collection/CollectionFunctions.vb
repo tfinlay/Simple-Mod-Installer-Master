@@ -2,38 +2,55 @@
 
 Module CollectionFunctions
     Public subDir
-    'Searches for files in the \mods folder
-    ''' <summary>
-    ''' Path is the Path to the folder you wish to scan, Addmods is a boolean to decide whether to add \mods to the given path.
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="path"></param>
-    ''' <param name="Addmods"></param>
-    Public Sub Collection_LoadMods(sender As Object, path As String, Addmods As Boolean)
+    Public Sub Collection_LoadMods(list As Object, path As String, addMods As Boolean, Optional MCVersion As String = "")
         'sender.Title.text = My.Settings.SelectedCollection
-        sender.ModList.ClearSelected()
-        sender.ModList.Items.Clear()
+        list.ClearSelected()
+        list.Items.Clear()
         'Getting 
         Dim modsq As String
 
-        If Addmods = True Then
+        If addMods = True Then
             modsq = "\mods"
         Else
             modsq = ""
         End If
 
-        Dim Folder As New IO.DirectoryInfo(path + modsq)
+        ' Make a reference to a directory.
+        Dim di As New DirectoryInfo(path + modsq)
+        ' Get a reference to each file in that directory.
+        Dim fiArr As FileInfo() = di.GetFiles()
+        ' Display the names of the files.
+        Dim fri As FileInfo
+
+        Dim foundFiles As String = ""
         Try
-            For Each File As IO.FileInfo In Folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
-                If Not File.Name.ToString.Contains(".CollectionInfo") Then
-                    If Not File.Name.ToString() = "folders.txt" Then
-                        sender.ModList.Items.Add(File.Name)
-                        Application.DoEvents()
-                    End If
+            For Each fri In fiArr
+                foundFiles = foundFiles + fri.Name + ", "
+                If Not fri.Name = "folders.txt" And Not fri.Name.Contains(".CollectionInfo") Then
+                    list.Items.Add(fri.Name)
                 End If
             Next
-        Catch
-            MsgBox("An error occured when looking for mods. Maybe the mods folder has been deleted? We're going to try and create a new one now...")
+            If Not MCVersion = "" Then
+                Try
+                    ' Make a reference to a directory.
+                    Dim di2 As New DirectoryInfo(path + modsq + "\" + MCVersion)
+                    ' Get a reference to each file in that directory.
+                    Dim fiArr2 As FileInfo() = di2.GetFiles()
+                    ' Display the names of the files.
+                    Dim fri2 As FileInfo
+                    For Each fri2 In fiArr2
+                        foundFiles = foundFiles + MCVersion + "\" + fri2.Name + ", "
+                        If Not fri2.Name = "folders.txt" And Not fri2.Name.Contains(".CollectionInfo") Then
+                            list.Items.Add(MCVersion + "\" + fri2.Name)
+                        End If
+                    Next
+                Catch ex As Exception
+                    MsgBox("An error occured when looking for mods in \" + MCVersion + " We're now going to create it...")
+                    My.Computer.FileSystem.CreateDirectory(path + modsq + "\" + MCVersion)
+                End Try
+            End If
+        Catch ex As Exception
+            MsgBox("An error occured when looking for mods. Maybe the mods folder has been deleted? We're going to try and create a new one now... The Error was: " + ex.Message)
             Try
                 My.Computer.FileSystem.CreateDirectory(path + modsq)
             Catch
@@ -42,9 +59,22 @@ Module CollectionFunctions
                 Form3.Show()
             End Try
         End Try
+        testmsg("Found Files: " + foundFiles.ToString())
         Return
     End Sub
 
+    Public Sub Collection_DelFiles(rootDirectory As String, list As Object)
+        Dim ModInt = 0
+        For l_index As Integer = 0 To list.CheckedItems.Count - 1
+            Dim l_text As String = CStr(list.CheckedItems(l_index))
+            Try
+                My.Computer.FileSystem.DeleteFile(rootDirectory + "\" + l_text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.DeletePermanently)
+            Catch ex As Exception
+                MsgBox("Failed to delete file: " + l_text.ToString() + " The following error was thrown: " + ex.Message.ToString)
+            End Try
+
+        Next
+    End Sub
 
     Public Sub FolderView_LoadFiles(sender As Object, path As String)
         'sender.Title.text = My.Settings.SelectedCollection

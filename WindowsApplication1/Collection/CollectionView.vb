@@ -33,7 +33,7 @@ Public Class CollectionView
         If My.Settings.compareTitles = True Then
             Call FolderCheck(Path)
         End If
-        Call Collection_LoadMods(Me, Path, True)
+        Call Collection_LoadMods(ModList, Path, True, My.Settings.SelectedCollection_MCversion)
         Call Collection_ReadInfo(Me, Path)
         'CompareTitles can be toggled on and off in settings: listed as "Safer Collections"
         Call Collection_CompareTitles(Me, My.Settings.compareTitles)
@@ -70,43 +70,52 @@ Public Class CollectionView
     End Sub
 
     Private Sub DelMod_Click(sender As Object, e As EventArgs) Handles DelMod.Click
-        ModInt2 = 0
+        'ModInt2 = 0
 
-        For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
-            Dim l_text As String = CStr(ModList.CheckedItems(l_index))
+        'For l_index As Integer = 0 To ModList.CheckedItems.Count - 1
+        '    Dim l_text As String = CStr(ModList.CheckedItems(l_index))
 
-            Dim CurrentLocation As String
-            Dim CurrentLocation2 As String
+        '    Dim CurrentLocation As String
+        '    Dim CurrentLocation2 As String
 
-            If Button4.Text = "View Disabled Mods" Then
-                CurrentLocation = Path + "\mods\" + l_text
-                CurrentLocation2 = Path + "\mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+        '    If Button4.Text = "View Disabled Mods" Then
+        '        CurrentLocation = Path + "\mods\" + l_text
+        '        CurrentLocation2 = Path + "\mods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
 
-            Else
-                CurrentLocation = Path + "\DisabledMods\" + l_text
-                CurrentLocation2 = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
+        '    Else
+        '        CurrentLocation = Path + "\DisabledMods\" + l_text
+        '        CurrentLocation2 = Path + "\DisabledMods\" + My.Settings.SelectedCollection_MCversion + "\" + l_text
 
-            End If
+        '    End If
 
-            If My.Computer.FileSystem.FileExists(CurrentLocation) Then
-                Try
-                    My.Computer.FileSystem.DeleteFile(CurrentLocation)
-                    ModInt2 = ModInt2 + 1
-                Catch
-                    MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
-                End Try
-            ElseIf File.Exists(CurrentLocation2) Then
-                Try
-                    My.Computer.FileSystem.DeleteFile(CurrentLocation2)
-                    ModInt2 = ModInt2 + 1
-                Catch
-                    MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
-                End Try
-            Else
-                MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
-            End If
-        Next
-        MsgBox("Successfully Removed " + ModInt2.ToString + " mods from collection")
+        '    If My.Computer.FileSystem.FileExists(CurrentLocation) Then
+        '        Try
+        '            My.Computer.FileSystem.DeleteFile(CurrentLocation)
+        '            ModInt2 = ModInt2 + 1
+        '        Catch
+        '            MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+        '        End Try
+        '    ElseIf File.Exists(CurrentLocation2) Then
+        '        Try
+        '            My.Computer.FileSystem.DeleteFile(CurrentLocation2)
+        '            ModInt2 = ModInt2 + 1
+        '        Catch
+        '            MsgBox("Failed to delete file: " + l_text + " maybe it doesn't exist anymore?")
+        '        End Try
+        '    Else
+        '        MsgBox("Failed to find file: " + l_text + " maybe it doesn't exist anymore?")
+        '    End If
+        'Next
+        'MsgBox("Successfully Removed " + ModInt2.ToString + " mods from collection")
+        Dim currentLocation As String = ""
+        If Button4.Text = "View Disabled Mods" Then
+            currentLocation = Path + "\mods"
+
+        Else
+            currentLocation = Path + "\DisabledMods"
+        End If
+
+        Call Collection_DelFiles(currentLocation, ModList)
 
         Call Load_Manager()
     End Sub
@@ -148,7 +157,7 @@ Public Class CollectionView
             Enabled = False
             EntryMenu.Enabled = False
             'Start Calling:
-            Call Collection_LoadMods(Me, Path + "\DisabledMods", False)
+            Call Collection_LoadMods(ModList, Path + "\DisabledMods", False, My.Settings.SelectedCollection_MCversion)
             'Finish Up:
             AddMod.Enabled = False
             'DelMod.Enabled = False
@@ -362,6 +371,22 @@ Public Class CollectionView
     Private Sub drag_DragEnter(sender As System.Object, e As System.Windows.Forms.DragEventArgs) Handles Me.DragEnter, ModList.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
+
+    Private Sub CollectionView_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Delete Then
+            Dim currentLocation As String = ""
+            If Button4.Text = "View Disabled Mods" Then
+                currentLocation = Path + "\mods"
+
+            Else
+                currentLocation = Path + "\DisabledMods"
+            End If
+
+            Call Collection_DelFiles(currentLocation, ModList)
+
+            Call Load_Manager()
         End If
     End Sub
 End Class

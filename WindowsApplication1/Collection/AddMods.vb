@@ -161,7 +161,7 @@
             '    MsgBox("It appears that the selected folder contains " + System.IO.Directory.GetDirectories(FolderBrowserDialog1.SelectedPath).Length.ToString + " other folders, please remove these folders from the directory, then select it again.")
             '    FolderPath.Text = ""
             'Else
-            Call Collection_LoadMods(Me, FolderBrowserDialog1.SelectedPath, False)
+            Call Collection_LoadMods(ModList, FolderBrowserDialog1.SelectedPath, False, My.Settings.SelectedCollection_MCversion)
             'End If
 
 
