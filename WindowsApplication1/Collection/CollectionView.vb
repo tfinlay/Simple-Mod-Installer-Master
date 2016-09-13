@@ -121,8 +121,9 @@ Public Class CollectionView
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Enabled = False
-        FolderView.Show()
+        'Enabled = False
+        'FolderView.Show()
+        Process.Start("explorer.exe", "/root," + Path)
     End Sub
 
     Private Sub CollectionView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
