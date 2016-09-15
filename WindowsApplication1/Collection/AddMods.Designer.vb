@@ -152,6 +152,7 @@ Partial Class AddMods
         Me.Controls.Add(Me.SingleAdd)
         Me.Controls.Add(Me.AddButton)
         Me.Controls.Add(Me.AddFile_Title)
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False

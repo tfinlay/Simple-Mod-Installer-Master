@@ -23,6 +23,7 @@ Public Class CollectionView
     End Sub
 
     Sub Load_Manager()
+        Me.SuspendLayout()
         'Disable Changes While Loading:
         Enabled = False
         EntryMenu.Enabled = False
@@ -39,11 +40,11 @@ Public Class CollectionView
         Call Collection_CompareTitles(Me, My.Settings.compareTitles)
         'Gets Number of Mods in listbox:
         'Found At: http://stackoverflow.com/questions/12755701/vb-net-getting-each-item-in-a-listbox-and-finding-its-text-index
-        For l_index As Integer = 0 To ModList.Items.Count - 1
-            Dim l_text As String = CStr(ModList.Items(l_index))
-            ModInt = ModInt + 1
-        Next
-        ModCount.Text = "Mod Count: " + ModInt.ToString
+        'For l_index As Integer = 0 To ModList.Items.Count - 1
+        '    Dim l_text As String = CStr(ModList.Items(l_index))
+        '    ModInt = ModInt + 1
+        'Next
+        ModCount.Text = "Mod Count: " + ModList.Items.Count.ToString()
 
         'Enable Changes once Loading Finished:
         Text = "Edit Collection - " + Title.Text
@@ -56,6 +57,7 @@ Public Class CollectionView
         Me.AllowDrop = True
 
         Enabled = True
+        Me.ResumeLayout()
     End Sub
 
     Private Sub AddMod_Click(sender As Object, e As EventArgs) Handles AddMod.Click
@@ -279,6 +281,7 @@ Public Class CollectionView
                 MsgBox("Failed to delete File: collections.txt, please navigate to C:\Tfff1\Simple_MC\Mod_Collections and delete collections.txt to resolve this error")
             End Try
 
+            'Refresh the collection list and flush any bugs that may occur from unreset variables.
             Application.Restart()
 
         End If
@@ -347,7 +350,7 @@ Public Class CollectionView
             Dim BasePath As String = My.Settings.AddFiles_BasePath
             Dim trimmedFileName As String = functionalPathTrimmer(currentFile)
 
-            If Not currentFile = "" Then
+            If Not currentFile = "" And Not currentFile = "mods" Then
                 If isPathFile(currentFile) = True Then
                     If Not My.Computer.FileSystem.FileExists(BasePath + trimmedFileName) Then
                         My.Computer.FileSystem.CopyFile(currentFile, BasePath + trimmedFileName)
